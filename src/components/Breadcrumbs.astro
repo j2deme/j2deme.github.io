@@ -21,7 +21,7 @@ const breadcrumbs = getBreadcrumbs(currentPath).reverse();
   {
     breadcrumbs &&
       breadcrumbs.map((breadcrumb) => (
-        <a href={breadcrumb}>{breadcrumb.split("/").pop()}</a>
+        <a href={breadcrumb + "/"}>{breadcrumb.split("/").pop()}</a>
       ))
   }
 </div>
