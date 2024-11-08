@@ -2,7 +2,7 @@
 const { currentPath } = Astro.props; // with leading '/'  e.g /cars/toyota/sedans/toyota-crown
 const getBreadcrumbs = (path) => {
   const splitPath = path.split("/"); // e.g. result : [ '' ,'cars', 'toyota', 'sedans', 'toyota-crown']
-  // if (path.endsWith("/")) splitPath.pop(); // remove last element if path has a trailing '/'
+  if (path.endsWith("/")) splitPath.pop(); // remove last element if path has a trailing '/'
   let breadcrumbs: string[] = []; // Inicializar breadcrumbs
 
   while (splitPath.length > 2) {
