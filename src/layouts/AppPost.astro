@@ -12,7 +12,7 @@ import { Image } from "astro:assets";
 
 const currentPath = Astro.url.pathname;
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"app">["data"];
 
 const { title, description, heroImage } = Astro.props;
 const pubDate = dayjs(Astro.props.pubDate);
