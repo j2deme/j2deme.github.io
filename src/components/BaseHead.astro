@@ -22,6 +22,15 @@ import { ViewTransitions } from "astro:transitions";
 <link rel="icon" type="image/svg+xml" href="/Avatar.svg" />
 <meta name="generator" content={Astro.generator} />
 
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css"
+/>
+
 <!-- Font preloads -->
 
 <!-- Canonical URL -->
@@ -31,6 +40,7 @@ import { ViewTransitions } from "astro:transitions";
 <title>{title}{title !== SITE_TITLE ? ` | ${SITE_TITLE}` : ""}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="color-scheme" content="light dark" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
