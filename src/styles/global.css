@@ -219,3 +219,9 @@ footer .social-links a {
 footer .social-links a:hover {
 	color: rgb(var(--gray-dark));
 }
+
+main>article {
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+}
