@@ -1,23 +1,65 @@
 ---
 import Layout from "../layouts/BlogPost.astro";
+
+let materias = [
+  "Fundamentos de Programación",
+  "Programación Orientada a Objetos",
+  "Estructura de Datos",
+  "Tópicos Avanzados de Programación",
+  "Programación Web",
+  "Desarrollo de Aplicaciones Web",
+  "Desarrollo de Aplicaciones Móviles",
+  "Desarrollo de Aplicaciones Multiplataforma",
+  "Taller de Base de Datos",
+  "Administración de Base de Datos",
+];
 ---
 
 <Layout
-  title="Sobre mí"
-  description="Un poco sobre mí y el propósito de este blog"
-  pubDate={new Date("November 07 2024")}
+  title="Acerca de mí"
+  description="Un poco sobre mí y el propósito de esta página."
+  pubDate={new Date()}
   heroImage="/about-me.png"
 >
-  <p>Profesor, developer, padre de familia y esposo enamorado.</p>
+  <blockquote>
+    Profesor, developer, padre de familia y esposo enamorado.
+  </blockquote>
 
   <p>
-    Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac
-    ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem
-    viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu
-    ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac
-    tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-    pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim
-    sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam.
-    Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+    Hola, me llamo Jaime Jesús Delgado Meraz, de Cd. Valles, San Luis Potosí;
+    soy Licenciado en Informática, con Master en Sistemas Computacionales y
+    Doctor en Alta Dirección.
+  </p>
+  <p>
+    Soy docente en el Instituto Tecnológico de Ciudad Valles donde he impartido
+    asignaturas como:
+    <ul>
+      {materias.map((materia) => <li>{materia}</li>)}
+      <li>Entre otras...</li>
+    </ul>
+  </p>
+  <p>
+    Tengo experiencia en desarrollo de software, con tecnologías como: HTML,
+    CSS, JS, PHP, Java, Dart, Python, y bases de datos como MySQL y PostgreSQL.
+  </p>
+  <p>
+    Actualmente mí <em>tool set</em> se enfoca mucho en Laravel, Flutter y Python.
+  </p>
+  <p>
+    Me apasiona la programación y la enseñanza, me gusta compartir mi
+    conocimiento de una manera sencilla y clara, para que cualquier persona lo
+    pueda entender 😊.
+  </p>
+  <p>
+    Creo que la educación es la base para el desarrollo de la sociedad, y creo
+    que cada día es posible aprender algo nuevo, así sea algo pequeño.
+  </p>
+  <p>
+    Esta página pretende ser un espacio donde compartiré mis conocimientos,
+    experiencias y opiniones sobre la programación, la tecnología y la
+    educación.
+  </p>
+  <p>
+    Si te sirve o no lo que comparto <strong>depende</strong> 😉 de ti.
   </p>
 </Layout>
