@@ -5,6 +5,7 @@ import Footer from "../../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 import FormattedDateHuman from "../../components/FormattedDateHuman.astro";
+import { Image } from "astro:assets";
 
 const apps = (await getCollection("apps")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -81,11 +82,12 @@ const apps = (await getCollection("apps")).sort(
             apps.map((app) => (
               <li>
                 <a href={`/apps/${app.slug}/`}>
-                  <img
-                    width={720}
-                    height={360}
+                  <Image
                     src={app.data.heroImage}
                     alt=""
+                    width={720}
+                    height={360}
+                    loading={"eager"}
                   />
                   <h4 class="title">{app.data.title}</h4>
                   <p class="date">

@@ -73,7 +73,13 @@ const updatedDate = Astro.props.updatedDate
         <div class="hero-image">
           {
             heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
+              <Image
+                src={heroImage}
+                alt={title}
+                width={1020}
+                height={510}
+                loading={"eager"}
+              />
             )
           }
         </div>
