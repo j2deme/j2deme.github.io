@@ -2,7 +2,7 @@
 
 Este repositorio contiene el código fuente de mi página personal, alojada en [j2deme.github.io](https://j2deme.github.io).
 
-Incluye información sobre mi perfil profesional y académico, proyectos personales, scripts, slides de mis charlas y clases, y _posiblemente_ artículos de blog.
+Incluye información sobre mi perfil profesional y académico, proyectos personales, scripts, slides de mis clases y algunas conferencias, y _posiblemente_ artículos de blog.
 
 ## Tecnologías utilizadas
 
