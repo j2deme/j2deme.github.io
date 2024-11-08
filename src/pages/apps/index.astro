@@ -30,6 +30,9 @@ const apps = (await getCollection("apps")).sort(
       ul li {
         width: calc(50% - 1rem);
       }
+      ul li::marker {
+        content: none;
+      }
       ul li * {
         text-decoration: none;
         transition: 0.2s ease;
