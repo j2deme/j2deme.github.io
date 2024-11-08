@@ -209,8 +209,6 @@ footer .social-links {
 footer .social-links a {
 	justify-content: center;
 	align-items: center;
-	width: 25px;
-	height: 25px;
 	text-decoration: none;
 	color: rgb(var(--gray));
 	background-color: rgb(var(--gray-light));
