@@ -18,7 +18,13 @@ const link =
     : "/";
 ---
 
-<a href={link} class:list={[className, { active: isActive }]} {...props}>
+<a
+  href={link}
+  class:list={[className, { active: isActive }]}
+  {...props}
+  data-tooltip={label}
+  data-placement="bottom"
+>
   <slot />
   {isActive && <span>{label}</span>}
 </a>
