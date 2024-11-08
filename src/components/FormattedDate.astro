@@ -1,0 +1,19 @@
+---
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import "dayjs/locale/es"; // Import Spanish locale
+
+dayjs.extend(utc);
+dayjs.locale("es"); // Set locale to Spanish
+
+interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+const formattedDate = dayjs(date).utc().format("MMM D, YYYY");
+---
+
+<time datetime={dayjs(date).utc().toISOString()}>
+  {formattedDate}
+</time>

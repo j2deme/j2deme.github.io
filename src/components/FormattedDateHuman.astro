@@ -1,0 +1,21 @@
+---
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/es"; // Importar el locale en español
+
+dayjs.extend(utc);
+dayjs.extend(relativeTime);
+dayjs.locale("es"); // Establecer el locale a español
+
+interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+const humanDate = dayjs(date).utc().fromNow();
+---
+
+<time datetime={dayjs(date).utc().toISOString()}>
+  {humanDate}
+</time>
