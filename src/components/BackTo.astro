@@ -1,0 +1,65 @@
+---
+import { IconChevronLeft } from "@tabler/icons-preact";
+import voca from "voca";
+
+const { currentPath } = Astro.props; // with leading '/'  e.g /cars/toyota/sedans/toyota-crown
+const getBreadcrumbs = (path) => {
+  const splitPath = path.split("/"); // e.g. result : [ '' ,'cars', 'toyota', 'sedans', 'toyota-crown']
+  if (path.endsWith("/")) splitPath.pop(); // remove last element if path has a trailing '/'
+  let breadcrumbs: string[] = []; // Inicializar breadcrumbs
+
+  while (splitPath.length > 2) {
+    // stop until where the first path preceeding the trailing '/' at index 1 i.e ['', 'first_path', 'second_path' , ...]
+    splitPath.pop();
+    breadcrumbs.push(splitPath.join("/"));
+  }
+
+  return breadcrumbs;
+};
+
+const breadcrumbs = getBreadcrumbs(currentPath).reverse();
+const hasSubPaths = breadcrumbs.length > 0;
+---
+
+<div>
+  {
+    hasSubPaths && (
+      <a
+        role="button"
+        class="outline secondary"
+        href={breadcrumbs[0] + "/"}
+        aria-label="Previous Section"
+      >
+        <IconChevronLeft stroke={2} />{" "}
+        {voca.titleCase(breadcrumbs[0].split("/").pop())}
+      </a>
+    )
+  }
+</div>
+<style>
+  div {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0.7em;
+  }
+  a {
+    font-size: 0.8em;
+    padding: 0.2em 0.5em;
+    width: fit-content;
+    height: 2em;
+    align-items: center;
+    color: var(--pico-color-grey-300);
+    border-color: var(--pico-color-grey-300);
+  }
+  a:hover {
+    color: var(--pico-secondary);
+    background-color: var(--pico-color-grey-100);
+  }
+  a svg {
+    margin-bottom: 5px;
+    stroke: var(--pico-color-grey-300);
+  }
+  a:hover svg {
+    stroke: var(--pico-secondary);
+  }
+</style>
