@@ -11,10 +11,16 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.9",
+    "@astrojs/preact": "^3.5.3",
     "@astrojs/rss": "^4.0.9",
     "@astrojs/sitemap": "^3.2.1",
+    "@picocss/pico": "^2.0.6",
     "@tabler/icons": "^3.21.0",
+    "@tabler/icons-preact": "^3.21.0",
+    "animate.css": "^4.1.1",
     "astro": "^4.16.10",
-    "dayjs": "^1.11.13"
+    "dayjs": "^1.11.13",
+    "preact": "^10.24.3",
+    "voca": "^1.4.1"
   }
 }
