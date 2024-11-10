@@ -3,6 +3,8 @@
 // all pages through the use of the <BaseHead /> component.
 import "../styles/global.css";
 import { SITE_TITLE } from "../consts";
+import "@picocss/pico/css/pico.blue.min.css";
+import "@picocss/pico/css/pico.colors.min.css";
 
 interface Props {
   title: string;
@@ -21,15 +23,6 @@ import { ViewTransitions } from "astro:transitions";
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/Avatar.svg" />
 <meta name="generator" content={Astro.generator} />
-
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css"
-/>
 
 <!-- Font preloads -->
 
