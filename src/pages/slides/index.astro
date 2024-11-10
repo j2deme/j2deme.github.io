@@ -1,5 +1,5 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { SITE } from "../../consts";
 import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
 import FormattedDateHuman from "../../components/FormattedDateHuman.astro";
@@ -14,7 +14,7 @@ const slides = (await getCollection("slides")).sort(
 <!doctype html>
 <html lang="es">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={SITE.TITLE} description={SITE.DESCRIPTION} />
     <style>
       main {
         width: 960px;
