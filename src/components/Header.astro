@@ -133,7 +133,13 @@ import { SITE_TITLE } from "../consts";
     text-decoration: none;
   }
   nav .internal-links a:not(.active):hover {
-    border-bottom-color: rgb(var(--gray-light));
+    border-bottom-color: var(--pico-color-grey-500);
+  }
+  nav .internal-links a:not(.active) svg {
+    stroke: var(--pico-color-grey-400);
+  }
+  nav .internal-links a:not(.active):hover svg {
+    stroke: var(--pico-color-grey-500);
   }
   nav a svg {
     margin-bottom: -0.3em;
@@ -141,5 +147,8 @@ import { SITE_TITLE } from "../consts";
   nav a.active {
     text-decoration: none;
     border-bottom-color: var(--accent);
+  }
+  nav a.active svg {
+    stroke: var(--accent);
   }
 </style>
