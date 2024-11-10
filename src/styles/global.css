@@ -10,9 +10,9 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/Iosevka/6.0.0/iosevka/iosevka.min.css);
 
 :root {
-	--accent: #2337ff;
-	--accent-light: #4d5dff;
-	--accent-dark: #000d8a;
+	--accent: var(--pico-color-blue-500);
+	--accent-light: var(--pico-color-blue-300);
+	--accent-dark: var(--pico-color-blue-700);
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
@@ -116,7 +116,7 @@ table {
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: var(--pico-border-radius);
 }
 
 code {
@@ -211,10 +211,4 @@ footer .social-links a {
 
 footer .social-links a:hover {
 	color: rgb(var(--gray-dark));
-}
-
-main>article {
-	background-color: transparent;
-	box-shadow: none;
-	border: none;
 }
