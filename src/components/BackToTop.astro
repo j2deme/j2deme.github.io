@@ -1,35 +1,88 @@
 ---
-
+import { IconChevronUp } from "@tabler/icons-preact";
+import "animate.css";
 ---
 
-<button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="#000000"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up"
-    ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-      d="M12 5l0 14"></path><path d="M18 11l-6 -6"></path><path d="M6 11l6 -6"
-    ></path></svg
-  >
-</button>
+<!-- onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" -->
+<nav>
+  <button class="outline secondary">
+    <IconChevronUp stroke={2} class="animate__animated" />
+  </button>
+</nav>
 
 <style>
+  nav {
+    display: flex;
+    justify-content: flex-start;
+  }
   button {
     position: fixed;
     bottom: 1em;
     right: 1em;
     padding: 0.1em 0.3em;
-    border-radius: 12px;
-    box-shadow: var(--box-shadow);
+    width: 2em;
+    height: 2em;
+    border: none;
+  }
+  button:focus,
+  button:active {
+    border: none;
+    box-shadow: none;
   }
   button svg {
-    stroke: whitesmoke;
+    stroke: var(--pico-color-grey-300);
+  }
+  button:hover svg {
+    stroke: var(--pico-color-grey-700);
   }
 </style>
+
+<script>
+  const animateCSS = (element, animation, prefix = "animate__") =>
+    // We create a Promise and return it
+    new Promise((resolve, reject) => {
+      const animationName = `${prefix}${animation}`;
+      const node = document.querySelector(element);
+
+      node.classList.add(`${prefix}animated`, animationName);
+
+      // When the animation ends, we clean the classes and resolve the Promise
+      function handleAnimationEnd(event) {
+        event.stopPropagation();
+        node.classList.remove(`${prefix}animated`, animationName);
+        resolve("Animation ended");
+      }
+
+      node.addEventListener("animationend", handleAnimationEnd, { once: true });
+    });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    let button = document.querySelector("button");
+
+    if (button) {
+      animateCSS("button", "fadeOutDown").then(() => {
+        button.style.display = "none";
+      });
+
+      button.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    window.addEventListener("scroll", () => {
+      if (button) {
+        let pageLength = document.body.scrollHeight;
+        let percentageScrolled = (window.scrollY / pageLength) * 100;
+        if (percentageScrolled > 20) {
+          button.style.display = "block";
+          let percentage = Math.round(percentageScrolled);
+          if (percentage % 20 === 0) {
+            animateCSS("button", "bounce");
+          }
+        } else {
+          button.style.display = "none";
+        }
+      }
+    });
+  });
+</script>
