@@ -26,13 +26,6 @@
 	--font-code: Iosevka, "Iosevka Web", "Monaspace Krypton Var", "Fira Code", monospace;
 }
 
-html {
-	overflow: auto;
-	scrollbar-color: var(--accent-light) rgb(var(--gray-light));
-	scrollbar-width: thin;
-	scroll-behavior: smooth;
-}
-
 body {
 	font-family: var(--font-body);
 	margin: 0;
@@ -60,7 +53,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: var(--font-header);
+	font-family: var(--font-header) !important;
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
