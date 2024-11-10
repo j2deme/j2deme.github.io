@@ -1,7 +1,6 @@
 ---
 import BackToTop from "../components/BackToTop.astro";
 import BaseHead from "../components/BaseHead.astro";
-import Breadcrumbs from "../components/Breadcrumbs.astro";
 import dayjs from "dayjs";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
@@ -9,6 +8,7 @@ import FormattedDateHuman from "../components/FormattedDateHuman.astro";
 import Header from "../components/Header.astro";
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
+import BackTo from "../components/BackTo.astro";
 
 const currentPath = Astro.url.pathname;
 
@@ -64,7 +64,8 @@ const updatedDate = Astro.props.updatedDate
       }
       article {
         width: 100%;
-        max-width: calc(100% - 2em);
+        /* max-width: calc(100% - 2em); */
+        max-width: fit-content;
         margin: auto;
         padding: 1em;
         align-self: center;
@@ -75,8 +76,8 @@ const updatedDate = Astro.props.updatedDate
   <body>
     <Header />
     <main>
-      <Breadcrumbs currentPath={currentPath} />
       <article>
+        <BackTo currentPath={currentPath} />
         <div class="hero-image">
           {
             heroImage && (
@@ -108,9 +109,9 @@ const updatedDate = Astro.props.updatedDate
           </div>
           <slot />
         </div>
+        <BackToTop />
       </article>
     </main>
-    <BackToTop />
     <Footer />
   </body>
 </html>
