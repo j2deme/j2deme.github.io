@@ -14,13 +14,21 @@
     "@astrojs/preact": "^3.5.3",
     "@astrojs/rss": "^4.0.9",
     "@astrojs/sitemap": "^3.2.1",
+    "@iconify-json/tabler": "^1.2.7",
     "@picocss/pico": "^2.0.6",
+    "@rehype-pretty/transformers": "^0.13.2",
     "@tabler/icons": "^3.21.0",
     "@tabler/icons-preact": "^3.21.0",
     "animate.css": "^4.1.1",
     "astro": "^4.16.10",
+    "astro-icon": "^1.1.2",
     "dayjs": "^1.11.13",
     "preact": "^10.24.3",
+    "rehype-pretty-code": "^0.14.0",
+    "shiki": "^1.22.2",
     "voca": "^1.4.1"
+  },
+  "devDependencies": {
+    "@shikijs/transformers": "^1.22.2"
   }
 }
