@@ -9,6 +9,7 @@ import Header from "../components/Header.astro";
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import BackTo from "../components/BackTo.astro";
+import { Icon } from "astro-icon/components";
 
 const currentPath = Astro.url.pathname;
 
@@ -54,21 +55,30 @@ const updatedDate = Astro.props.updatedDate
       }
       .title h1 {
         margin: 0 0 0.5em 0;
+        color: var(--accent);
       }
       .date {
+        display: flex;
+        align-content: space-around;
         margin-bottom: 0.5em;
         color: rgb(var(--gray));
+        font-size: 0.9em;
+      }
+      .date div {
+        flex: auto;
+        margin-right: 1em;
       }
       .last-updated-on {
         font-style: italic;
       }
       article {
         width: 100%;
-        /* max-width: calc(100% - 2em); */
-        max-width: fit-content;
+        max-width: calc(100% - 2em);
         margin: auto;
         padding: 1em;
         align-self: center;
+        box-shadow: none;
+        background-color: transparent;
       }
     </style>
   </head>
@@ -93,18 +103,23 @@ const updatedDate = Astro.props.updatedDate
         </div>
         <div class="prose">
           <div class="title">
+            <h1>{title}</h1>
             <div class="date">
-              <FormattedDate date={pubDate.toISOString()} />
+              <div>
+                <Icon name="tabler:calendar" />
+                {" "}
+                <FormattedDate date={pubDate.toISOString()} />
+              </div>
               {
                 updatedDate && !updatedDate.isSame(pubDate) && (
                   <div class="last-updated-on">
-                    Actualizado{" "}
+                    <Icon name="tabler:refresh" />
+                    {"  "}
                     <FormattedDateHuman date={updatedDate.toISOString()} />
                   </div>
                 )
               }
             </div>
-            <h1>{title}</h1>
             <hr />
           </div>
           <slot />
