@@ -1,12 +1,14 @@
 ---
-import { IconChevronUp } from "@tabler/icons-preact";
+import { Icon } from "astro-icon/components";
 import "animate.css";
 ---
 
-<!-- onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" -->
 <nav>
-  <button class="outline secondary">
-    <IconChevronUp stroke={2} class="animate__animated" />
+  <button
+    class="outline contrast"
+    onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+  >
+    <Icon name="tabler:chevron-up" class="animate__animated" />
   </button>
 </nav>
 
@@ -29,11 +31,11 @@ import "animate.css";
     border: none;
     box-shadow: none;
   }
-  button svg {
-    stroke: var(--pico-color-grey-300);
+  button [data-icon] {
+    color: var(--pico-color-grey-300);
   }
-  button:hover svg {
-    stroke: var(--pico-color-grey-700);
+  button:hover [data-icon] {
+    color: var(--pico-color-grey-500);
   }
 </style>
 
@@ -64,9 +66,9 @@ import "animate.css";
         button.style.display = "none";
       });
 
-      button.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
+      // button.addEventListener("click", () => {
+      //   window.scrollTo({ top: 0, behavior: "smooth" });
+      // });
     }
 
     window.addEventListener("scroll", () => {
