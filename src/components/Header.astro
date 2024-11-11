@@ -2,6 +2,7 @@
 import HeaderLink from "./HeaderLink.astro";
 import SocialLinks from "./SocialLinks.astro";
 import { SITE } from "../consts";
+import { Icon } from "astro-icon/components";
 ---
 
 <header>
@@ -9,97 +10,19 @@ import { SITE } from "../consts";
     <h2><a href="/">{SITE.TITLE}</a></h2>
     <div class="internal-links">
       <HeaderLink href="/" aria-label="Inicio">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-home"
-          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-            d="M5 12l-2 0l9 -9l9 9l-2 0"></path><path
-            d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path><path
-            d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path></svg
-        >
+        <Icon name="tabler:home" />
       </HeaderLink>
       <HeaderLink href="/slides" aria-label="Slides">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-presentation"
-          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-            d="M3 4l18 0"></path><path
-            d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path><path
-            d="M12 16l0 4"></path><path d="M9 20l6 0"></path><path
-            d="M8 12l3 -3l2 2l3 -3"></path></svg
-        >
+        <Icon name="tabler:presentation" />
       </HeaderLink>
       <HeaderLink href="/apps" aria-label="Apps">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-apps"
-          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-            d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"
-          ></path><path
-            d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"
-          ></path><path
-            d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"
-          ></path><path d="M14 7l6 0"></path><path d="M17 4l0 6"></path></svg
-        >
+        <Icon name="tabler:apps" />
       </HeaderLink>
       <HeaderLink href="/blog" aria-label="Blog">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-article"
-          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-            d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
-          ></path><path d="M7 8h10"></path><path d="M7 12h10"></path><path
-            d="M7 16h10"></path></svg
-        >
+        <Icon name="tabler:file-text" />
       </HeaderLink>
       <HeaderLink href="/about" aria-label="Acerca de mí">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-user"
-          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-            d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path><path
-            d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path></svg
-        >
+        <Icon name="tabler:user" />
       </HeaderLink>
     </div>
     <SocialLinks />
@@ -132,23 +55,23 @@ import { SITE } from "../consts";
     border-bottom: 4px solid transparent;
     text-decoration: none;
   }
-  nav .internal-links a:not(.active):hover {
-    border-bottom-color: var(--pico-color-grey-500);
-  }
-  nav .internal-links a:not(.active) svg {
-    stroke: var(--pico-color-grey-400);
-  }
-  nav .internal-links a:not(.active):hover svg {
-    stroke: var(--pico-color-grey-500);
-  }
-  nav a svg {
+  nav a [data-icon] {
     margin-bottom: -0.3em;
+  }
+  nav .internal-links a:not(.active) [data-icon] {
+    color: var(--pico-color-grey-500);
+  }
+  nav .internal-links a:not(.active):hover {
+    border-bottom-color: var(--pico-color-grey-400);
+  }
+  nav .internal-links a:not(.active):hover [data-icon] {
+    color: var(--pico-color-grey-400);
   }
   nav a.active {
     text-decoration: none;
     border-bottom-color: var(--accent);
   }
-  nav a.active svg {
-    stroke: var(--accent);
+  nav a.active [data-icon] {
+    color: var(--accent) !important;
   }
 </style>
