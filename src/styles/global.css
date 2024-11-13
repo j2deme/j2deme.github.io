@@ -10,9 +10,9 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/Iosevka/6.0.0/iosevka/iosevka.min.css);
 
 :root {
-	--accent: var(--pico-color-blue-500);
+	--accent: var(--pico-color-blue-600);
 	--accent-light: var(--pico-color-blue-300);
-	--accent-dark: var(--pico-color-blue-700);
+	--accent-dark: var(--pico-color-blue-800);
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
@@ -113,6 +113,10 @@ blockquote {
 hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
+}
+
+dt {
+	font-weight: 700;
 }
 
 @media (max-width: 720px) {
