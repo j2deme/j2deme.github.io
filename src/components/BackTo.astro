@@ -1,5 +1,6 @@
 ---
-import { IconChevronLeft } from "@tabler/icons-preact";
+import type { GetStaticPaths } from "astro";
+import { Icon } from "astro-icon/components";
 import voca from "voca";
 
 const { currentPath } = Astro.props; // with leading '/'  e.g /cars/toyota/sedans/toyota-crown
@@ -19,19 +20,21 @@ const getBreadcrumbs = (path) => {
 
 const breadcrumbs = getBreadcrumbs(currentPath).reverse();
 const hasSubPaths = breadcrumbs.length > 0;
+const section = hasSubPaths
+  ? voca.titleCase(breadcrumbs[0].split("/").pop())
+  : null;
 ---
 
 <div>
   {
-    hasSubPaths && (
+    section && hasSubPaths && (
       <a
         role="button"
-        class="outline secondary"
+        class="outline contrast"
         href={breadcrumbs[0] + "/"}
         aria-label="Previous Section"
       >
-        <IconChevronLeft stroke={2} />{" "}
-        {voca.titleCase(breadcrumbs[0].split("/").pop())}
+        <Icon name="tabler:chevron-left" /> {section}
       </a>
     )
   }
@@ -41,6 +44,7 @@ const hasSubPaths = breadcrumbs.length > 0;
     display: flex;
     justify-content: flex-start;
     margin-bottom: 0.7em;
+    margin-left: 2.5rem;
   }
   a {
     font-size: 0.8em;
@@ -52,14 +56,13 @@ const hasSubPaths = breadcrumbs.length > 0;
     border-color: var(--pico-color-grey-300);
   }
   a:hover {
-    color: var(--pico-secondary);
-    background-color: var(--pico-color-grey-100);
+    color: var(--pico-color-grey-500);
   }
-  a svg {
-    margin-bottom: 5px;
-    stroke: var(--pico-color-grey-300);
+  a [data-icon] {
+    margin-bottom: 2px;
+    color: var(--pico-color-grey-300);
   }
-  a:hover svg {
-    stroke: var(--pico-secondary);
+  a:hover [data-icon] {
+    color: var(--pico-color-grey-500);
   }
 </style>

@@ -5,7 +5,7 @@ import "animate.css";
 
 <nav>
   <button
-    class="outline contrast"
+    class="outline contrast b2t"
     onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
   >
     <Icon name="tabler:chevron-up" class="animate__animated" />
@@ -59,10 +59,10 @@ import "animate.css";
     });
 
   document.addEventListener("DOMContentLoaded", () => {
-    let button = document.querySelector("button");
+    let button = document.querySelector("button.b2t") as HTMLButtonElement;
 
     if (button) {
-      animateCSS("button", "fadeOutDown").then(() => {
+      animateCSS("button.b2t", "fadeOutDown").then(() => {
         button.style.display = "none";
       });
 
@@ -79,7 +79,7 @@ import "animate.css";
           button.style.display = "block";
           let percentage = Math.round(percentageScrolled);
           if (percentage % 20 === 0) {
-            animateCSS("button", "bounce");
+            animateCSS("button.b2t", "bounce");
           }
         } else {
           button.style.display = "none";
