@@ -3,6 +3,8 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../consts";
+import { Image } from "astro:assets";
+import avatar from "../assets/avatar.png";
 ---
 
 <!doctype html>
@@ -16,7 +18,7 @@ import { SITE } from "../consts";
       <h1>Hello World!</h1>
       <p>Bienvenidos a mi sitio web.</p>
       <div class="avatar">
-        <img src="../avatar.svg" alt="Avatar" />
+        <Image src={avatar} alt="Avatar" width={200} height={200} />
       </div>
     </main>
     <Footer />
@@ -30,7 +32,7 @@ import { SITE } from "../consts";
         var(--pico-color-blue-700),
         var(--pico-color-blue-600)
       ),
-      url("../pattern-alt.svg");
+      url("../assets/pattern-alt.svg");
     background-size: 205px;
     background-repeat: repeat;
     background-blend-mode: color;
