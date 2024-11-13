@@ -14,14 +14,50 @@ import { SITE } from "../consts";
     <Header />
     <main>
       <h1>Hello World!</h1>
-      <p>Bienvenid@ a mi sitio web.</p>
+      <p>Bienvenidos a mi sitio web.</p>
+      <div class="avatar">
+        <img src="../avatar.svg" alt="Avatar" />
+      </div>
     </main>
     <Footer />
   </body>
 </html>
 
 <style>
+  body {
+    background-image: linear-gradient(
+        180deg,
+        var(--pico-color-blue-700),
+        var(--pico-color-blue-600)
+      ),
+      url("../pattern-alt.svg");
+    background-size: 205px;
+    background-repeat: repeat;
+    background-blend-mode: color;
+  }
   main {
-    min-height: 50vh;
+    color: var(--pico-color-grey-100);
+    min-height: 80vh;
+  }
+  h1 {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--pico-color-white);
+  }
+  p {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--pico-color-grey-100);
+  }
+  .avatar {
+    display: flex;
+    justify-content: center;
+  }
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px var(--pico-color-blue-500);
+    background-color: var(--pico-color-grey-100);
   }
 </style>
