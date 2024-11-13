@@ -1,7 +1,6 @@
 ---
 import BackToTop from "../components/BackToTop.astro";
 import BaseHead from "../components/BaseHead.astro";
-import Breadcrumbs from "../components/Breadcrumbs.astro";
 import dayjs from "dayjs";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
@@ -9,10 +8,12 @@ import FormattedDateHuman from "../components/FormattedDateHuman.astro";
 import Header from "../components/Header.astro";
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
+import BackTo from "../components/BackTo.astro";
+import { Icon } from "astro-icon/components";
 
 const currentPath = Astro.url.pathname;
 
-type Props = CollectionEntry<"app">["data"];
+type Props = CollectionEntry<"apps">["data"];
 
 const { title, description, heroImage } = Astro.props;
 const pubDate = dayjs(Astro.props.pubDate);
@@ -26,9 +27,10 @@ const updatedDate = Astro.props.updatedDate
     <BaseHead title={title} description={description} />
     <style>
       main {
-        width: calc(100% - 2em);
+        width: calc(100% - 1em);
         max-width: 100%;
         margin: 0;
+        margin-left: 0.5em;
       }
       .hero-image {
         width: 100%;
@@ -40,7 +42,7 @@ const updatedDate = Astro.props.updatedDate
         box-shadow: var(--box-shadow);
       }
       .prose {
-        width: 720px;
+        width: 800px;
         max-width: calc(100% - 2em);
         margin: auto;
         padding: 1em;
@@ -68,6 +70,8 @@ const updatedDate = Astro.props.updatedDate
         margin: auto;
         padding: 1em;
         align-self: center;
+        box-shadow: none;
+        background-color: transparent;
       }
     </style>
   </head>
@@ -75,7 +79,7 @@ const updatedDate = Astro.props.updatedDate
   <body>
     <Header />
     <main>
-      <Breadcrumbs currentPath={currentPath} />
+      <BackTo currentPath={currentPath} />
       <article>
         <div class="hero-image">
           {
@@ -92,18 +96,23 @@ const updatedDate = Astro.props.updatedDate
         </div>
         <div class="prose">
           <div class="title">
+            <h1>{title}</h1>
             <div class="date">
-              <FormattedDate date={pubDate.toISOString()} />
+              <div>
+                <Icon name="tabler:calendar" />
+                {" "}
+                <FormattedDate date={pubDate.toISOString()} />
+              </div>
               {
                 updatedDate && !updatedDate.isSame(pubDate) && (
                   <div class="last-updated-on">
-                    Actualizado{" "}
+                    <Icon name="tabler:refresh" />
+                    {"  "}
                     <FormattedDateHuman date={updatedDate.toISOString()} />
                   </div>
                 )
               }
             </div>
-            <h1>{title}</h1>
             <hr />
           </div>
           <slot />
