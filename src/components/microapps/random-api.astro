@@ -1,0 +1,262 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<article class="grid">
+  <section>
+    <form>
+      <fieldset>
+        <label for="seed">Número de control</label>
+        <input type="text" id="seed" name="seed" />
+        <small
+          >Sino cuentas con un número de control, puedes usar tu nombre.</small
+        >
+      </fieldset>
+      <fieldset>
+        <label for="private">
+          <input type="checkbox" id="private" name="private" role="switch" />
+          Incluir APIs que requieran autenticación
+        </label>
+      </fieldset>
+      <fieldset>
+        <button type="submit">
+          <Icon name="tabler:arrows-shuffle" /> Obtener API Aleatoria
+        </button>
+        <button type="reset">
+          <Icon name="tabler:refresh" /> Limpiar
+        </button>
+      </fieldset>
+    </form>
+  </section>
+  <section class="output">
+    <h3>Resultado</h3>
+    <dl>
+      <dt>Nombre</dt>
+      <dd id="api-name">---</dd>
+      <dt>Descripción</dt>
+      <dd id="api-desc">---</dd>
+      <dt>Requiere autenticación</dt>
+      <dd id="api-auth">---</dd>
+      <dt>URL</dt>
+      <dd>
+        <ul id="api-urls">
+          <li>---</li>
+        </ul>
+      </dd>
+    </dl>
+  </section>
+</article>
+
+<script>
+  const apis = [
+    // {
+    //   name: "PokeAPI",
+    //   url: ["https://pokeapi.co/"],
+    //   description: "Obten una amplia información relacionada con Pokémon.",
+    //   requiresAuth: false,
+    // },
+    {
+      name: "Star Wars API",
+      url: ["https://swapi.dev/"],
+      description: "Consulta información sobre Star Wars.",
+      requiresAuth: false,
+    },
+    {
+      name: "Rick and Morty API",
+      url: ["https://rickandmortyapi.com/"],
+      description: "Es Rick y Morty, pero en una API 🥒.",
+      requiresAuth: false,
+    },
+    {
+      name: "The Lord of the Rings API",
+      url: ["https://the-one-api.dev/"],
+      description:
+        "La saga de El Señor de los Anillos, lista para ser consultada.",
+      requiresAuth: true,
+    },
+    {
+      name: "The Harry Potter API",
+      url: [
+        "https://docs.potterdb.com/es/apis/rest",
+        "https://hp-api.onrender.com/",
+      ],
+      description: "Para los fans de Harry Potter, hay más de un API.",
+      requiresAuth: false,
+    },
+    {
+      name: "The Studio Ghibli API",
+      url: ["https://ghibliapi.vercel.app/", "https://ghibli.rest/docs/"],
+      description: "Para los amantes de las películas de Studio Ghibli.",
+      requiresAuth: false,
+    },
+    {
+      name: "The Open Movie Database",
+      url: ["https://www.omdbapi.com/"],
+      description: 'Es como IMDb, pero "abierta"... aunque requiere API Key.',
+      requiresAuth: true,
+    },
+    {
+      name: "The Weather API",
+      url: ["https://openweathermap.org/api"],
+      description:
+        "Una de las APIs más populares para obtener el clima, proporciona hasta 1,000 peticiones gratuitas por día.",
+      requiresAuth: true,
+    },
+    // {
+    //   name: "The Weather Stack API",
+    //   url: ["https://weatherstack.com/"],
+    //   description:
+    //     "Una alternativa a OpenWeatherMap, proporciona 100 peticiones gratuitas al mes.",
+    //   requiresAuth: true,
+    // },
+    {
+      name: "Random User Generator",
+      url: ["https://randomuser.me/"],
+      description: "Parece simple, pero es muy útil para pruebas.",
+      requiresAuth: false,
+    },
+    {
+      name: "Open Library API",
+      url: ["https://openlibrary.org/swagger/docs"],
+      description: "Consulta información sobre libros y autores 📚.",
+      requiresAuth: false,
+    },
+    {
+      name: "The REST Countries API",
+      url: ["https://restcountries.com/"],
+      description: "Obtén información sobre países y regiones.",
+      requiresAuth: false,
+    },
+    {
+      name: "Random Data API",
+      url: ["https://random-data-api.com/documentation"],
+      description: "Genera datos aleatorios de diversos tipos.",
+      requiresAuth: false,
+    },
+    {
+      name: "Faker API",
+      url: ["https://fakerapi.it/"],
+      description: "Genera datos falsos de diversos tipos para pruebas.",
+      requiresAuth: false,
+    },
+    {
+      name: "Marvel API",
+      url: ["https://developer.marvel.com/"],
+      description: "Consulta información sobre personajes de Marvel.",
+      requiresAuth: true,
+    },
+    {
+      name: "Disney API",
+      url: ["https://disneyapi.dev/docs/"],
+      description: "Consulta información sobre personajes de Disney.",
+      requiresAuth: false,
+    },
+  ];
+
+  let button = document.querySelector("button") as HTMLButtonElement;
+  let seedTxt = document.getElementById("seed") as HTMLInputElement;
+  let authCheck = document.getElementById("private") as HTMLInputElement;
+  let resetBtn = document.querySelector(
+    "button[type=reset]"
+  ) as HTMLButtonElement;
+
+  seedTxt.addEventListener("blur", (event) => {
+    if (seedTxt.value) {
+      seedTxt.ariaInvalid = "false";
+    } else {
+      seedTxt.ariaInvalid = "true";
+    }
+  });
+
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    let api;
+
+    button.setAttribute("aria-busy", "true");
+
+    if (!seedTxt.value) {
+      seedTxt.ariaInvalid = "true";
+      seedTxt.focus();
+      button.removeAttribute("aria-busy");
+      // api = {
+      //   name: "No asignado",
+      //   url: [""],
+      //   description: "Ingresa tus datos para obtener un API aleatorio",
+      //   requiresAuth: false,
+      // };
+      // cargarResultado(api.name, api.description, api.requiresAuth, api.url);
+    } else {
+      let seed = seedTxt.value;
+
+      let hash = 0;
+      for (let i = 0; i < seed.length; i++) {
+        const char = seed.charCodeAt(i);
+        hash = (hash << 5) - hash + char;
+        hash |= 0; // Convert to 32bit integer
+      }
+      // const numero = parseInt(hash.toString().substring(0, 8), 16);
+      let index = Math.abs((hash % apis.length) + 1);
+
+      let publicas = apis.filter((api) => !api.requiresAuth);
+
+      if (authCheck.checked) {
+        index = Math.abs((hash % apis.length) + 1);
+        api = apis[index];
+      } else {
+        index = Math.abs((hash % publicas.length) + 1);
+        api = publicas[index];
+      }
+
+      cargarResultado(api.name, api.description, api.requiresAuth, api.url);
+
+      button.removeAttribute("aria-busy");
+    }
+
+    // (document.querySelector("form") as HTMLFormElement).reset();
+  });
+
+  resetBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    (document.querySelector("form") as HTMLFormElement).reset();
+    seedTxt.removeAttribute("aria-invalid");
+    cargarResultado("---", "---", null, null);
+  });
+
+  function cargarResultado(nombre, descripcion, auth, urls) {
+    let nameField = document.getElementById("api-name") as HTMLDataElement;
+    nameField.textContent = nombre;
+
+    let descField = document.getElementById("api-desc") as HTMLDataElement;
+    descField.textContent = descripcion;
+
+    let authField = document.getElementById("api-auth") as HTMLDataElement;
+    if (auth === null) {
+      authField.textContent = "---";
+    } else {
+      authField.textContent = auth ? "Sí 🔑" : "No 🌎";
+    }
+
+    let urlsField = document.getElementById("api-urls") as HTMLUListElement;
+    urlsField.innerHTML = "";
+    if (!urls) {
+      urlsField.innerHTML = "<li>---</li>";
+    } else {
+      urls.forEach((url) => {
+        let li = document.createElement("li");
+        let a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = url;
+        li.appendChild(a);
+        urlsField.appendChild(li);
+      });
+    }
+  }
+</script>
+
+<style>
+  dl {
+    font-size: 0.9rem;
+  }
+</style>
