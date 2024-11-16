@@ -1,0 +1,184 @@
+---
+import { Icon } from "astro-icon/components";
+
+const props = Astro.props;
+
+const min = props["min"] || 1;
+const max = props["max"] || 10;
+---
+
+<article class="grid">
+  <section>
+    <form>
+      <input type="hidden" name="min" value={min} />
+      <input type="hidden" name="max" value={max} />
+      <fieldset>
+        <label for="seed">Número de control</label>
+        <input type="text" id="seed" name="seed" />
+      </fieldset>
+      <fieldset>
+        <label for="fdn">Fecha de Nacimiento</label>
+        <input type="date" id="fdn" name="fdn" />
+      </fieldset>
+      <fieldset>
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" name="nombre" />
+      </fieldset>
+      <fieldset>
+        <button type="submit">
+          <Icon name="tabler:arrows-shuffle" /> Obtener ejercicios
+        </button>
+        <button type="reset">
+          <Icon name="tabler:refresh" /> Limpiar
+        </button>
+      </fieldset>
+    </form>
+  </section>
+  <section class="output">
+    <h3>Ejercicios asignados</h3>
+    <ul id="exercises"></ul>
+  </section>
+</article>
+
+<script>
+  let minTxt = document.querySelector("input[name=min]") as HTMLInputElement;
+  let maxTxt = document.querySelector("input[name=max]") as HTMLInputElement;
+
+  const min_number = parseInt(minTxt.value);
+  const max_number = parseInt(maxTxt.value);
+
+  let button = document.querySelector("button") as HTMLButtonElement;
+  let seedTxt = document.getElementById("seed") as HTMLInputElement;
+  let fdnTxt = document.getElementById("fdn") as HTMLInputElement;
+  let nombreTxt = document.getElementById("nombre") as HTMLInputElement;
+
+  let resetBtn = document.querySelector(
+    "button[type=reset]"
+  ) as HTMLButtonElement;
+
+  seedTxt.addEventListener("blur", (event) => {
+    if (seedTxt.value.length < 8) {
+      seedTxt.setAttribute("aria-invalid", "true");
+    } else {
+      seedTxt.removeAttribute("aria-invalid");
+    }
+  });
+
+  fdnTxt.addEventListener("blur", (event) => {
+    if (fdnTxt.value.length < 10) {
+      fdnTxt.setAttribute("aria-invalid", "true");
+    } else {
+      fdnTxt.removeAttribute("aria-invalid");
+    }
+  });
+
+  nombreTxt.addEventListener("blur", (event) => {
+    if (nombreTxt.value.length < 5) {
+      nombreTxt.setAttribute("aria-invalid", "true");
+    } else {
+      nombreTxt.removeAttribute("aria-invalid");
+    }
+  });
+
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    button.setAttribute("aria-busy", "true");
+
+    if (
+      seedTxt.value.length < 8 ||
+      fdnTxt.value.length < 10 ||
+      nombreTxt.value.length < 3
+    ) {
+      alert("Por favor, llena todos los campos.");
+      button.removeAttribute("aria-busy");
+      return;
+    } else {
+      const seed = seedTxt.value;
+      const fdn = fdnTxt.value;
+      const nombre = nombreTxt.value;
+
+      let ejercicios = new Array();
+
+      let ex1 = hasher(seed, 1, 3);
+      let ex2 = hasher(fdn, 4, 6);
+      let ex3 = hasher(nombre, 7, 9);
+
+      ejercicios.push(ex1, ex2, ex3);
+
+      const ul = document.getElementById("exercises") as HTMLUListElement;
+      ul.innerHTML = "";
+      ejercicios.forEach((ejercicio) => {
+        const li = document.createElement("li");
+        li.textContent = `Ejercicio ${ejercicio}`;
+        ul.appendChild(li);
+      });
+
+      button.removeAttribute("aria-busy");
+    }
+  });
+
+  resetBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    (document.querySelector("form") as HTMLFormElement).reset();
+    seedTxt.removeAttribute("aria-invalid");
+  });
+
+  function hasher(seed, min, max) {
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) {
+      const char = seed.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash |= 0; // Convert to 32bit integer
+    }
+    let range = max - min + 1;
+    let index = Math.abs(hash % range) + min;
+    return index;
+  }
+
+  // function aleatorio_determinista(
+  //   fecha,
+  //   textoCorto,
+  //   textoLargo,
+  //   rangoMin = 1,
+  //   rangoMax = 10,
+  //   cantidad = 3
+  // ) {
+  //   // Convertir la fecha a una cadena numérica (por ejemplo, YYYYMMDD)
+  //   const fechaNum = fecha.replace(/-/g, "");
+
+  //   // Combinar todas las entradas en una cadena
+  //   const cadenaCombinada = fechaNum + textoCorto + textoLargo;
+
+  //   // Calcular la semilla sumando los códigos ASCII
+  //   let semilla = 0;
+  //   for (let i = 0; i < cadenaCombinada.length; i++) {
+  //     semilla += cadenaCombinada.charCodeAt(i);
+  //   }
+
+  //   // Algoritmo lineal congruencial (ajusta los valores a)
+  //   function aleatorioLCG(semilla) {
+  //     const a = 1664525;
+  //     const c = 1013904223;
+  //     const m = Math.pow(2, 32); // Módulo
+  //     semilla = (a * semilla + c) % m;
+  //     return semilla / m;
+  //   }
+
+  //   // Generar y filtrar los números
+  //   const numeros = new Set();
+  //   while (numeros.size < cantidad) {
+  //     let random = aleatorioLCG(semilla);
+  //     const numero = Math.floor(random * (rangoMax - rangoMin + 1)) + rangoMin;
+  //     numeros.add(numero);
+  //   }
+
+  //   return Array.from(numeros);
+  // }
+</script>
+
+<style>
+  dl {
+    font-size: 0.9rem;
+  }
+</style>
