@@ -7,15 +7,19 @@ import FormattedDate from "../components/FormattedDate.astro";
 import FormattedDateHuman from "../components/FormattedDateHuman.astro";
 import Header from "../components/Header.astro";
 import type { CollectionEntry } from "astro:content";
+import type { MarkdownHeading } from "astro";
 import { Image } from "astro:assets";
 import BackTo from "../components/BackTo.astro";
 import { Icon } from "astro-icon/components";
+import TableOfContents from "../components/TableOfContents.astro";
 
 const currentPath = Astro.url.pathname;
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">["data"] & {
+  headings: MarkdownHeading[];
+};
 
-const { title, description, heroImage } = Astro.props;
+const { title, description, heroImage, headings } = Astro.props;
 const pubDate = dayjs(Astro.props.pubDate);
 const updatedDate = Astro.props.updatedDate
   ? dayjs(Astro.props.updatedDate)
@@ -27,7 +31,7 @@ const updatedDate = Astro.props.updatedDate
     <BaseHead title={title} description={description} />
     <style>
       main {
-        width: calc(100% - 2em);
+        width: calc(100% - 1em);
         max-width: 100%;
         margin: 0;
       }
@@ -41,8 +45,8 @@ const updatedDate = Astro.props.updatedDate
         box-shadow: var(--box-shadow);
       }
       .prose {
-        width: 720px;
-        max-width: calc(100% - 2em);
+        width: 75ch;
+        max-width: calc(100% - 1em);
         margin: auto;
         padding: 1em;
         color: rgb(var(--gray-dark));
@@ -73,12 +77,25 @@ const updatedDate = Astro.props.updatedDate
       }
       article {
         width: 100%;
-        max-width: calc(100% - 2em);
         margin: auto;
         padding: 1em;
         align-self: center;
         box-shadow: none;
         background-color: transparent;
+      }
+      .footnotes {
+        border-top: 1px solid rgb(var(--gray-light));
+        padding-top: 1em;
+      }
+      @media (max-width: 720px) {
+        main {
+          width: 100%;
+          max-width: 100%;
+        }
+        .prose {
+          width: 100%;
+          padding: 0.5rem;
+        }
       }
     </style>
   </head>
@@ -113,7 +130,7 @@ const updatedDate = Astro.props.updatedDate
               {
                 updatedDate && !updatedDate.isSame(pubDate) && (
                   <div class="last-updated-on">
-                    <Icon name="tabler:refresh" />
+                    <Icon name="tabler:calendar-bolt" />
                     {"  "}
                     <FormattedDateHuman date={updatedDate.toISOString()} />
                   </div>
@@ -122,6 +139,7 @@ const updatedDate = Astro.props.updatedDate
             </div>
             <hr />
           </div>
+          {currentPath !== "/about/" && <TableOfContents headings={headings} />}
           <slot />
         </div>
         <BackToTop />
