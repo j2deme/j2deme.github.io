@@ -27,7 +27,7 @@
     "preact": "^10.24.3",
     "rehype-pretty-code": "^0.14.0",
     "seeded-rand": "^2.0.1",
-    "shiki": "^1.22.2",
+    "shiki": "^1.23.1",
     "voca": "^1.4.1"
   },
   "devDependencies": {
