@@ -11,7 +11,7 @@
 
 :root {
 	--accent: var(--pico-color-blue-600);
-	--accent-light: var(--pico-color-blue-300);
+	--accent-light: var(--pico-color-blue-400);
 	--accent-dark: var(--pico-color-blue-800);
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
@@ -41,7 +41,7 @@ body {
 }
 
 main {
-	width: 720px;
+	width: 80ch;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
@@ -88,26 +88,23 @@ img {
 
 code {
 	font-family: var(--font-code);
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+	background-color: rgb(var(--gray-dark));
+	color: #fcfcfc;
 }
 
 pre {
 	font-family: var(--font-code);
-	border-radius: 8px;
+	overflow-x: auto;
 }
 
 pre>code {
-	all: unset;
-	word-break: normal;
+	padding: calc(var(--pico-spacing) - 0.5rem);
 }
 
 blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
 	margin: 0px;
-	font-size: 1.333em;
 }
 
 hr {
