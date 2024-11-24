@@ -1,7 +1,7 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import SocialLinks from "./SocialLinks.astro";
-import { SITE } from "../consts";
+import { NAV_LINKS, SITE } from "../consts";
 import { Icon } from "astro-icon/components";
 ---
 
@@ -9,21 +9,14 @@ import { Icon } from "astro-icon/components";
   <nav>
     <h2><a href="/">{SITE.TITLE}</a></h2>
     <div class="internal-links">
-      <HeaderLink href="/" aria-label="Inicio">
-        <Icon name="tabler:home" />
-      </HeaderLink>
-      <!-- <HeaderLink href="/slides" aria-label="Slides">
-        <Icon name="tabler:presentation" />
-      </HeaderLink> -->
-      <HeaderLink href="/apps" aria-label="Apps">
-        <Icon name="tabler:apps" />
-      </HeaderLink>
-      <!-- <HeaderLink href="/blog" aria-label="Blog">
-        <Icon name="tabler:file-text" />
-      </HeaderLink> -->
-      <HeaderLink href="/about" aria-label="Acerca de mí">
-        <Icon name="tabler:user" />
-      </HeaderLink>
+      {
+        NAV_LINKS &&
+          NAV_LINKS.map((link) => (
+            <HeaderLink href={link.href} aria-label={link.label}>
+              <Icon name={`tabler:${link.icon}`} />
+            </HeaderLink>
+          ))
+      }
     </div>
     <SocialLinks />
   </nav>
