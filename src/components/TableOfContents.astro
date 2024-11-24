@@ -1,0 +1,72 @@
+---
+import type { MarkdownHeading } from "astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
+---
+
+<details
+  style={`display: ${filteredHeadings.length === 0 ? "none" : "block"};`}
+>
+  <summary>
+    <Icon name="tabler:list" />
+    Contenidos
+  </summary>
+  <ul>
+    {
+      filteredHeadings.map((heading) => (
+        <li>
+          <a href={`#${heading.slug}`} class="smooth">
+            {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>
+
+<script>
+  document.querySelectorAll(".smooth").forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth",
+      });
+    });
+  });
+</script>
+
+<style>
+  details {
+    padding: 0.5rem 1em;
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: var(--pico-border-radius);
+  }
+  summary {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  details[open] summary {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgb(var(--gray-light));
+  }
+  ul {
+    list-style: none;
+    padding-left: 1.5rem;
+  }
+  li {
+    margin: 0.3em 0;
+    font-size: 0.9rem;
+  }
+  svg {
+    margin-right: 0.3em;
+    margin-top: -0.2em;
+  }
+</style>
