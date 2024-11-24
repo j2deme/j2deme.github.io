@@ -148,12 +148,15 @@ dt {
 	white-space: nowrap;
 }
 
-.social-links,
-nav .social-links a,
-footer .social-links a {
-	color: var(--black);
+.social-links {
 	display: flex;
+	justify-content: center;
 	transition: color 0.2s, background-color 0.2s;
+}
+
+nav .social-links a {
+	color: var(--black);
+	padding: 0 0.1rem;
 }
 
 nav .social-links a:hover {
@@ -161,21 +164,26 @@ nav .social-links a:hover {
 }
 
 footer .social-links {
-	justify-content: center;
-	gap: 1em;
 	margin-top: 1em;
+	align-items: center;
 }
 
 footer .social-links a {
+	display: inline-flex;
 	justify-content: center;
 	align-items: center;
 	text-decoration: none;
 	color: rgb(var(--gray));
 	background-color: rgb(var(--gray-light));
-	border-radius: 50%;
+	border-radius: 100%;
 	padding: 0.5em;
+	margin: 0 0.3em;
+	transition: color 0.2s, background-color 0.2s;
+	width: 2em;
+	height: 2em;
 }
 
 footer .social-links a:hover {
-	color: rgb(var(--gray-dark));
+	color: var(--accent);
+	background-color: white;
 }
