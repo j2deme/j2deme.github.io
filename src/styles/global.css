@@ -103,8 +103,10 @@ pre>code {
 
 blockquote {
 	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
+}
+
+.prose blockquote>p {
+	margin-bottom: 0.3rem;
 }
 
 hr {
