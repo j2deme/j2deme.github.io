@@ -3,6 +3,7 @@ import {
   transformerNotationDiff,
 } from "@shikijs/transformers";
 
+import { SITE } from "./src/consts.ts";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
@@ -34,7 +35,7 @@ const rpcOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://j2deme.github.io",
+  site: SITE.SITEURL,
   integrations: [mdx(), sitemap(), preact({ compat: true }), icon()],
   markdown: {
     syntaxHighlight: false,
