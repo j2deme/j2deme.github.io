@@ -12,6 +12,7 @@ export type Site = {
 export type Link = {
   href: string
   label: string
+  icon?: string
 }
 
 export const SITE: Site = {
@@ -25,15 +26,15 @@ export const SITE: Site = {
 }
 
 export const NAV_LINKS: Link[] = [
-  { href: '/slides', label: 'Slides' },
-  { href: '/apps', label: 'Apps' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/tags', label: 'tags' },
-  { href: '/about', label: 'about' },
+  { href: '/', label: 'Home', icon: 'home' },
+  // { href: '/slides', label: 'Slides', icon: 'presentation' },
+  { href: '/blog', label: 'Blog', icon: 'article' },
+  { href: '/apps', label: 'Apps', icon: 'apps' },
+  { href: '/about', label: 'Acerca de', icon: 'user' },
 ]
 
 export const SOCIAL_LINKS: Link[] = [
-  { href: 'https://github.com/j2deme', label: 'GitHub' },
-  { href: SITE.EMAIL, label: 'Email' },
-  { href: '/rss.xml', label: 'RSS' },
+  { href: 'https://github.com/j2deme', label: 'Sígueme en GitHub', icon: 'brand-github' },
+  { href: `mailto:${SITE.EMAIL}`, label: 'Email', icon: 'mail' },
+  { href: '/rss.xml', label: 'RSS', icon: 'rss' },
 ]
