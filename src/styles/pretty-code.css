@@ -5,6 +5,7 @@
   background-color: rgb(var(--gray-light));
   border-top-left-radius: var(--pico-border-radius);
   border-top-right-radius: var(--pico-border-radius);
+  color: rgb(var(--gray-dark));
   margin-bottom: -0.3rem;
   font-size: 0.8rem;
   padding: 0.5rem;
@@ -30,22 +31,18 @@
   border-top-right-radius: 0px;
 }
 
-figure[data-rehype-pretty-code-figure] code {
-  max-width: 100%;
-}
-
 figure[data-rehype-pretty-code-figure] pre+figcaption {
   border: none;
   background-color: transparent;
   color: rgb(var(--gray));
   font-size: 0.9rem;
-  padding-top: 0.3rem !important;
+  padding-top: 0.1rem !important;
 }
 
 /* Styling highlighted blocks */
 [data-highlighted-chars] {
-  border: 2px solid var(--pico-color-blue-500);
-  background-color: var(--pico-color-blue-700);
+  border: 2px solid var(--pico-color-slate-500);
+  background-color: var(--pico-color-slate-700);
   border-radius: var(--pico-border-radius);
 }
 
@@ -91,14 +88,11 @@ code[data-line-numbers-max-digits="4"]>[data-line]::before {
 [data-rehype-pretty-code-fragment] pre {
   padding-left: 0;
   padding-right: 0;
-  overflow-x: scroll;
 }
 
 [data-line] {
   padding-left: 0.3rem;
   padding-right: 0.3rem;
-  /* break line on to the next line */
-  white-space: pre-wrap;
 }
 
 /* REHYPE COPY BUTTON */
