@@ -189,3 +189,48 @@ footer .social-links a:hover {
 	color: var(--accent);
 	background-color: white;
 }
+
+.footnotes {
+	border-top: 1px solid rgb(var(--gray-light));
+	padding-top: 1em;
+}
+
+/* CUSTOM MSG BOXES  */
+.info,
+.warning,
+.error,
+.ok {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1em 0;
+	padding: 1em;
+}
+
+.info p,
+.warning p,
+.error p,
+.ok p {
+	margin: 0;
+	color: inherit;
+}
+
+.info i,
+.warning i,
+.error i,
+.ok i {
+	margin-right: 0.5em;
+	font-size: 1.5em;
+}
+
+.info {
+	border-radius: var(--pico-border-radius);
+	background-color: var(--pico-color-azure-100);
+	color: var(--pico-color-azure-500);
+}
+
+.warning {
+	border-radius: var(--pico-border-radius);
+	background-color: var(--pico-color-amber-50);
+	color: var(--pico-color-amber-500);
+}
