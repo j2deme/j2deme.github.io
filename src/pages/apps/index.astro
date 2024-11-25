@@ -18,9 +18,6 @@ const apps = (await getCollection("apps")).sort(
   <head>
     <BaseHead title={SITE.TITLE} description={SITE.DESCRIPTION} />
     <style>
-      main {
-        width: 960px;
-      }
       ul {
         display: flex;
         flex-wrap: wrap;
@@ -30,8 +27,7 @@ const apps = (await getCollection("apps")).sort(
         padding: 0;
       }
       ul li {
-        border: 1px solid var(--pico-color-grey-200);
-        /* width: calc(50% - 1rem); */
+        /* border: 1px solid var(--pico-color-grey-200); */
         width: 100%;
         padding: 0.5rem;
         border-radius: 12px;
@@ -50,7 +46,7 @@ const apps = (await getCollection("apps")).sort(
       }
       ul li a {
         display: flex;
-        gap: 1rem;
+        gap: 0.5rem;
       }
       ul li div {
         padding: 0.5rem;
@@ -63,10 +59,12 @@ const apps = (await getCollection("apps")).sort(
       .date {
         margin: 0;
         color: rgb(var(--gray));
+        font-size: 0.95rem;
       }
       .description {
         margin: 0;
         color: var(--pico-color-grey-600);
+        font-size: 0.9rem;
       }
       ul li a:hover .title,
       ul li a:hover .date,
@@ -80,9 +78,20 @@ const apps = (await getCollection("apps")).sort(
         ul {
           gap: 0.5em;
         }
-        ul li {
+        ul li a {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
           width: 100%;
-          text-align: center;
+          border: none;
+        }
+        ul li a img {
+          width: 100%;
+          /* flex: 1; */
+        }
+        ul li a .text-content {
+          padding-top: 0;
+          margin-top: 0.5rem;
         }
       }
     </style>
@@ -104,13 +113,11 @@ const apps = (await getCollection("apps")).sort(
                     height={360}
                     loading={"eager"}
                   />
-                  <div>
+                  <div class="text-content">
                     <h4 class="title">{app.data.title}</h4>
                     <p class="date">
-                      <>
-                        <Icon name="tabler:refresh" />
-                        <FormattedDateHuman date={app.data.pubDate} />
-                      </>
+                      <Icon name="tabler:calendar" />
+                      <FormattedDateHuman date={app.data.pubDate} />
                     </p>
                     <p class="description">{app.data.description}</p>
                   </div>
