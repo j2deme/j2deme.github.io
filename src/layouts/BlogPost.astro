@@ -24,6 +24,7 @@ const pubDate = dayjs(Astro.props.pubDate);
 const updatedDate = Astro.props.updatedDate
   ? dayjs(Astro.props.updatedDate)
   : null;
+const tags = Astro.props.tags;
 ---
 
 <html lang="es">
@@ -87,6 +88,40 @@ const updatedDate = Astro.props.updatedDate
         border-top: 1px solid rgb(var(--gray-light));
         padding-top: 1em;
       }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.5em;
+        margin-bottom: 1em;
+      }
+      .tag {
+        padding: 0.3em;
+        font-size: 0.7em;
+        color: rgb(var(--gray));
+        text-decoration: none;
+        transition: 0.2s ease;
+        font-family: var(--font-code);
+      }
+      .tag:hover {
+        color: rgb(var(--gray-dark));
+      }
+      .draft {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1em 0;
+        padding: 1em;
+        background-color: var(--pico-color-amber-50);
+        border-radius: 12px;
+        color: var(--pico-color-amber-250);
+      }
+      .draft p {
+        margin: 0;
+      }
+      .draft svg {
+        margin-right: 0.5em;
+      }
       @media (max-width: 720px) {
         main {
           width: 100%;
@@ -137,9 +172,27 @@ const updatedDate = Astro.props.updatedDate
                 )
               }
             </div>
-            <hr />
+          </div>
+          <div class="tags">
+            {
+              tags &&
+                tags.map((tag) => (
+                  <a href={`/tags/${tag}/`} class="tag">
+                    <Icon name="tabler:tag" />
+                    {tag}
+                  </a>
+                ))
+            }
           </div>
           {currentPath !== "/about/" && <TableOfContents headings={headings} />}
+          {
+            Astro.props.draft && (
+              <div class="draft">
+                <Icon name="tabler:barrier-block" size="1.5em" />
+                <p>Publicación en borrador</p>
+              </div>
+            )
+          }
           <slot />
         </div>
         <BackToTop />
