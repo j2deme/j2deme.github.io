@@ -96,12 +96,14 @@ img {
 
 code {
 	font-family: var(--font-code);
-	background-color: rgb(var(--gray-dark));
+	background-color: var(--pico-color-slate-800);
 	color: #fcfcfc;
+	padding: 0.2em 0.4em;
 }
 
 pre {
 	font-family: var(--font-code);
+	background-color: var(--pico-color-slate-800);
 	overflow-x: auto;
 }
 
