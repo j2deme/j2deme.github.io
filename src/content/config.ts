@@ -8,8 +8,13 @@ const blog = defineCollection({
 		description: z.string(),
 		// Transform string to Date object
 		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
+		// updatedDate: z.coerce.date().optional(),
+		updatedDate: z.string().optional(),
 		heroImage: z.string().optional(),
+		tags: z.array(z.string()).refine(items => new Set(items).size === items.length, {
+        message: 'tags must be unique',
+    }).optional(),
+    draft: z.boolean().optional(),
 	}),
 });
 
