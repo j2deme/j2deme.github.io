@@ -30,7 +30,6 @@ const updatedDate = Astro.props.updatedDate
         width: calc(100% - 1em);
         max-width: 100%;
         margin: 0;
-        margin-left: 0.5em;
       }
       .hero-image {
         width: 100%;
@@ -42,8 +41,8 @@ const updatedDate = Astro.props.updatedDate
         box-shadow: var(--box-shadow);
       }
       .prose {
-        width: 800px;
-        max-width: calc(100% - 2em);
+        width: 75ch;
+        max-width: calc(100% - 1em);
         margin: auto;
         padding: 1em;
         color: rgb(var(--gray-dark));
@@ -56,10 +55,18 @@ const updatedDate = Astro.props.updatedDate
       }
       .title h1 {
         margin: 0 0 0.5em 0;
+        color: var(--accent);
       }
       .date {
+        display: flex;
+        align-content: space-around;
         margin-bottom: 0.5em;
         color: rgb(var(--gray));
+        font-size: 0.9em;
+      }
+      .date div {
+        flex: auto;
+        margin-right: 1em;
       }
       .last-updated-on {
         font-style: italic;
@@ -106,7 +113,7 @@ const updatedDate = Astro.props.updatedDate
               {
                 updatedDate && !updatedDate.isSame(pubDate) && (
                   <div class="last-updated-on">
-                    <Icon name="tabler:refresh" />
+                    <Icon name="tabler:calendar-bolt" />
                     {"  "}
                     <FormattedDateHuman date={updatedDate.toISOString()} />
                   </div>
@@ -118,8 +125,8 @@ const updatedDate = Astro.props.updatedDate
           <slot />
         </div>
       </article>
+      <BackToTop />
+      <Footer />
     </main>
-    <BackToTop />
-    <Footer />
   </body>
 </html>
