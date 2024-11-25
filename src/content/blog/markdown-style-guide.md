@@ -4,6 +4,8 @@ description: "Here is a sample of some basic Markdown syntax that can be used wh
 pubDate: "Jun 19 2024"
 updatedDate: "2024-11-08"
 heroImage: "/blog-placeholder-1.jpg"
+tags: ["markdown", "syntax"]
+draft: true
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
@@ -190,16 +192,13 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 
 ### Syntax
 
-```markdown
+```html
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
-
-H<sub>2</sub>O
-
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
+H<sub>2</sub>O X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 
 Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
-
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and
+other small creatures.
 ```
 
 ### Output
@@ -213,3 +212,57 @@ X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
 
 Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+
+## Code examples
+
+### PHP
+
+```php
+<?php
+echo "Hello, World!";
+?>
+```
+
+### JavaScript
+
+```javascript title="/src/app/fetchMovie.js"
+console.log("Hello, World!");
+```
+
+### HTML
+
+```html showLineNumbers {2,4}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello World</title>
+  </head>
+  <body>
+    <p>Hello, World!</p>
+  </body>
+</html>
+```
+
+### Python
+
+```python /Hello/
+print("Hello, World!")
+```
+
+### CSS
+
+```css caption="Fetch movies from our server"
+body {
+  font-family: Arial, sans-serif;
+}
+```
+
+### Dart
+
+```dart
+void main() {
+  print('Hello, World!');
+}
+```
