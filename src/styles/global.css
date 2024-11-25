@@ -88,14 +88,6 @@ a:hover {
 	color: var(--accent);
 }
 
-p {
-	margin-bottom: 1em;
-}
-
-.prose p {
-	margin-bottom: 2em;
-}
-
 img {
 	max-width: 100%;
 	height: auto;
