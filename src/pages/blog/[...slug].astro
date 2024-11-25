@@ -5,7 +5,19 @@ import BlogPost from "../../layouts/BlogPost.astro";
 import type { MarkdownHeading } from "astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  var posts = await getCollection("blog");
+  posts = posts.filter(({ data }) =>
+    import.meta.env.PROD ? data.draft !== true : true
+  );
+  posts.sort((a, b) => {
+    const dateA = a.data.lastUpdated
+      ? new Date(a.data.lastUpdated)
+      : new Date(a.data.pubDate);
+    const dateB = b.data.lastUpdated
+      ? new Date(b.data.lastUpdated)
+      : new Date(b.data.pubDate);
+    return dateB.valueOf() - dateA.valueOf();
+  });
 
   const headings = await Promise.all(
     posts.map(async (post) => {
