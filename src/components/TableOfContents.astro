@@ -8,7 +8,9 @@ interface Props {
 
 const { headings } = Astro.props;
 
-const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
+const filteredHeadings = headings.filter(
+  (heading) => heading.depth <= 2 && heading.text !== "Footnotes"
+);
 ---
 
 <details
@@ -64,6 +66,13 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
   li {
     margin: 0.3em 0;
     font-size: 0.9rem;
+  }
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--accent);
+    text-decoration: underline;
   }
   svg {
     margin-right: 0.3em;
