@@ -24,7 +24,7 @@ const pubDate = dayjs(Astro.props.pubDate);
 const updatedDate = Astro.props.updatedDate
   ? dayjs(Astro.props.updatedDate)
   : null;
-const tags = Astro.props.tags;
+const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
 ---
 
 <html lang="es">
@@ -109,7 +109,7 @@ const tags = Astro.props.tags;
         margin: 1em 0;
         padding: 1em;
         background-color: var(--pico-color-amber-50);
-        border-radius: 12px;
+        border-radius: var(--pico-border-radius);
         color: var(--pico-color-amber-250);
       }
       .draft p {
