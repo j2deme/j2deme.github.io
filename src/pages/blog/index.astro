@@ -37,6 +37,7 @@ posts.sort((a, b) => {
         padding: 0;
       }
       ul li {
+        position: relative;
         width: calc(50% - 1rem);
       }
       ul li::marker {
@@ -80,6 +81,13 @@ posts.sort((a, b) => {
       ul a:hover img {
         box-shadow: var(--box-shadow);
       }
+      .draft {
+        float: right;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        color: var(--pico-color-amber-250);
+      }
       @media (max-width: 720px) {
         ul {
           gap: 0.5em;
@@ -106,6 +114,13 @@ posts.sort((a, b) => {
           {
             posts.map((post) => (
               <li>
+                {post.data.draft && (
+                  <Icon
+                    name="tabler:barrier-block"
+                    size="1.5em"
+                    class="draft"
+                  />
+                )}
                 <a href={`/blog/${post.slug}/`}>
                   <Image
                     width={720}
