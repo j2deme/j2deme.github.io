@@ -244,3 +244,15 @@ footer .social-links a:hover {
 	background-color: var(--pico-color-amber-50);
 	color: var(--pico-color-amber-500);
 }
+
+.error {
+	border-radius: var(--pico-border-radius);
+	background-color: var(--pico-color-red-50);
+	color: var(--pico-color-red-500);
+}
+
+.ok {
+	border-radius: var(--pico-border-radius);
+	background-color: var(--pico-color-green-50);
+	color: var(--pico-color-green-500);
+}
