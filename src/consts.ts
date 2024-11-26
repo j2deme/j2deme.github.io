@@ -26,10 +26,10 @@ export const SITE: Site = {
 }
 
 export const NAV_LINKS: Link[] = [
-  { href: '/', label: 'Home', icon: 'home' },
   // { href: '/slides', label: 'Slides', icon: 'presentation' },
-  { href: '/blog', label: 'Blog', icon: 'article' },
-  { href: '/apps', label: 'Apps', icon: 'apps' },
+  { href: '/blog', label: 'Blog', icon: 'archive' },
+  { href: '/tags', label: 'Tags', icon: 'tags' },
+  { href: '/apps', label: 'Apps', icon: 'code' },
   { href: '/about', label: 'Acerca de', icon: 'user' },
 ]
 
