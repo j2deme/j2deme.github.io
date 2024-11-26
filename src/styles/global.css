@@ -13,11 +13,12 @@
 	--accent: var(--pico-color-blue-600);
 	--accent-light: var(--pico-color-blue-400);
 	--accent-dark: var(--pico-color-blue-800);
+	--white: 252, 252, 252;
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
 	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fcfcfc;
+	--gray-gradient: rgba(var(--gray-light), 50%), rgb(var(--white));
 	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
 
@@ -97,7 +98,7 @@ img {
 code {
 	font-family: var(--font-code);
 	background-color: var(--pico-color-slate-800);
-	color: #fcfcfc;
+	color: rgb(var(--white));
 	padding: 0.2em 0.4em;
 }
 
@@ -197,7 +198,7 @@ footer .social-links a {
 
 footer .social-links a:hover {
 	color: var(--accent);
-	background-color: white;
+	background-color: rgb(var(--white));
 }
 
 nav .social-links a:last-of-type:hover,
