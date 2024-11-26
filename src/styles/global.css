@@ -200,6 +200,11 @@ footer .social-links a:hover {
 	background-color: white;
 }
 
+nav .social-links a:last-of-type:hover,
+footer .social-links a:last-of-type:hover {
+	color: var(--pico-color-orange-350);
+}
+
 .footnotes {
 	border-top: 1px solid rgb(var(--gray-light));
 	padding-top: 1em;
