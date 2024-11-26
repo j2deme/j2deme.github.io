@@ -6,7 +6,7 @@ interface Props {
   headings: MarkdownHeading[];
 }
 
-const { headings } = Astro.props;
+const headings = Astro.props.headings ?? [];
 
 const filteredHeadings = headings.filter(
   (heading) => heading.depth <= 2 && heading.text !== "Footnotes"
