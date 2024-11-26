@@ -7,6 +7,7 @@ import { getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
 var posts = await getCollection("blog");
 posts = posts.filter(({ data }) =>
@@ -108,36 +109,31 @@ posts.sort((a, b) => {
   <body>
     <Header />
     <main>
-      <section>
-        <h1>Blog</h1>
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                {post.data.draft && (
-                  <Icon
-                    name="tabler:barrier-block"
-                    size="1.5em"
-                    class="draft"
-                  />
-                )}
-                <a href={`/blog/${post.slug}/`}>
-                  <Image
-                    width={720}
-                    height={360}
-                    src={post.data.heroImage || ""}
-                    alt={post.data.title}
-                  />
-                  <h4 class="title">{post.data.title}</h4>
-                  <p class="date">
-                    <FormattedDate date={post.data.pubDate.toString()} />
-                  </p>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
+      <Breadcrumbs icons={["archive"]} />
+      <h1>Blog</h1>
+      <ul>
+        {
+          posts.map((post) => (
+            <li>
+              {post.data.draft && (
+                <Icon name="tabler:barrier-block" size="1.5em" class="draft" />
+              )}
+              <a href={`/blog/${post.slug}/`}>
+                <Image
+                  width={720}
+                  height={360}
+                  src={post.data.heroImage || ""}
+                  alt={post.data.title}
+                />
+                <h4 class="title">{post.data.title}</h4>
+                <p class="date">
+                  <FormattedDate date={post.data.pubDate.toString()} />
+                </p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </main>
     <Footer />
   </body>
