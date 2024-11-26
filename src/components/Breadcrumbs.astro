@@ -1,58 +1,82 @@
 ---
 import { Icon } from "astro-icon/components";
-const { currentPath } = Astro.props; // with leading '/'  e.g /cars/toyota/sedans/toyota-crown
-const getBreadcrumbs = (path) => {
+import voca from "voca";
+
+// const { currentPath } = Astro.props; // with leading '/'  e.g /cars/toyota/sedans/toyota-crown
+const currentPath = Astro.props.currentPath ?? Astro.url.pathname;
+const title = Astro.props.title ?? "";
+const compact = Astro.props.compact ?? null;
+var icons = Astro.props.icons ?? [];
+icons.unshift("home");
+
+const getBreadcrumbs = (path, compact) => {
   const splitPath = path.split("/"); // e.g. result : [ '' ,'cars', 'toyota', 'sedans', 'toyota-crown']
-  if (path.endsWith("/")) splitPath.pop(); // remove last element if path has a trailing '/'
+  // if (path.endsWith( "/")) splitPath.pop(); // remove last element if path has a trailing '/'
   let breadcrumbs: string[] = []; // Inicializar breadcrumbs
 
-  while (splitPath.length > 2) {
-    // stop until where the first path preceeding the trailing '/' at index 1 i.e ['', 'first_path', 'second_path' , ...]
-    splitPath.pop();
-    breadcrumbs.push(splitPath.join("/"));
+  if (compact && splitPath.length > 3) {
+    breadcrumbs.push(splitPath[1]); // First part
+    breadcrumbs.push(splitPath.slice(-1)[0]); // Last part
+  } else {
+    while (splitPath.length > 1) {
+      splitPath.pop();
+      breadcrumbs.push(splitPath.join("/"));
+    }
   }
 
   return breadcrumbs;
 };
 
-const breadcrumbs = getBreadcrumbs(currentPath).reverse();
-const hasSubPaths = breadcrumbs.length > 0;
+const breadcrumbs = getBreadcrumbs(currentPath, compact).reverse();
 ---
 
-<div>
-  <nav aria-label="breadcrumb">
-    <ul>
-      {
-        hasSubPaths && (
-          <li>
-            <a href="/" aria-label="Inicio">
-              <Icon name="tabler:home" />
-            </a>
-          </li>
-        )
-      }
-      {
-        breadcrumbs &&
-          breadcrumbs.map((breadcrumb) => (
-            <li>
-              <a href={breadcrumb + "/"}>
-                {(() => {
-                  const lastPart = breadcrumb.split("/").pop();
-                  return lastPart
-                    ? lastPart.charAt(0).toUpperCase() + lastPart.slice(1)
-                    : "";
-                })()}
-              </a>
-            </li>
-          ))
-      }
-    </ul>
-  </nav>
-</div>
+<nav>
+  {
+    breadcrumbs &&
+      breadcrumbs.map((breadcrumb, index) => (
+        <span>
+          <a
+            href={
+              index === breadcrumbs.length - 1 ? undefined : `${breadcrumb}/`
+            }
+            aria-label={breadcrumb}
+          >
+            <Icon name={`tabler:${icons[index] ?? "file-smile"}`} />
+            {(() => {
+              if (index === breadcrumbs.length - 1 && title) {
+                return title;
+              }
+              const lastPart = breadcrumb.split("/").pop()?.replace(/-/g, " ");
+              return voca.titleCase(lastPart || "");
+            })()}
+          </a>
+          {index !== breadcrumbs.length - 1 ? (
+            <Icon name="tabler:chevron-right" />
+          ) : null}
+        </span>
+      ))
+  }
+</nav>
+
 <style>
-  div {
+  nav {
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-content: center;
+    max-width: fit-content;
+    gap: 0.1em;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    color: rgb(var(--gray));
+  }
+  nav a {
+    text-decoration: none;
+    color: rgb(var(--gray));
+  }
+  nav a:hover {
+    color: rgb(var(--gray-dark));
+  }
+  nav a:last-child {
+    color: rgb(var(--gray-dark));
   }
 </style>
