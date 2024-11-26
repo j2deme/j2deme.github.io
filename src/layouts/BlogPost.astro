@@ -180,7 +180,7 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
                 ))
             }
           </div>
-          {currentPath !== "/about/" && <TableOfContents headings={headings} />}
+          <TableOfContents headings={headings} />
           {
             Astro.props.draft && (
               <div class="draft">
