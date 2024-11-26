@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import voca from "voca";
+import v from "voca";
 
 // const { currentPath } = Astro.props; // with leading '/'  e.g /cars/toyota/sedans/toyota-crown
 const currentPath = Astro.props.currentPath ?? Astro.url.pathname;
@@ -47,7 +47,7 @@ const breadcrumbs = getBreadcrumbs(currentPath, compact).reverse();
                 return title;
               }
               const lastPart = breadcrumb.split("/").pop()?.replace(/-/g, " ");
-              return voca.titleCase(lastPart || "");
+              return v.capitalize(lastPart || "");
             })()}
           </a>
           {index !== breadcrumbs.length - 1 ? (

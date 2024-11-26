@@ -37,7 +37,7 @@ const questions = [
 
 inquirer.prompt(questions).then((answers) => {
   let { title, description, tags } = answers;
-  title = v.titleCase(title);
+  title = v.capitalize(title);
   tags = v.lowerCase(tags);
   const slug = slugify(title, { lower: true });
   const date = dayjs().format("YYYY-MM-DD");
