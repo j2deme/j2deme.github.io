@@ -7,8 +7,14 @@ tags: ["astro", "mdx"]
 draft: true
 ---
 
+## Title
+
 Content goes here.
 
 ```js
 console.log("Hello, world!");
 ```
+
+## Another section
+
+More content goes here.
