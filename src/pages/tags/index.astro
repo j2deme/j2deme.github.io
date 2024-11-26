@@ -1,0 +1,191 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE } from "../../consts";
+import { getCollection } from "astro:content";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+var posts = await getCollection("blog");
+posts = posts.filter(({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true
+);
+posts.sort((a, b) => {
+  const dateA = a.data.updatedDate
+    ? new Date(a.data.updatedDate)
+    : new Date(a.data.pubDate);
+  const dateB = b.data.updatedDate
+    ? new Date(b.data.updatedDate)
+    : new Date(b.data.pubDate);
+  return dateB.valueOf() - dateA.valueOf();
+});
+
+var tags = new Set();
+posts.forEach((post) => {
+  if (post.data.tags) {
+    post.data.tags.forEach((tag) => tags.add(tag));
+  }
+});
+var sortedTags = Array.from(tags).sort();
+
+var tagCounts = {};
+posts.forEach((post) => {
+  if (post.data.tags) {
+    post.data.tags.forEach((tag) => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    });
+  }
+});
+sortedTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
+
+// Función para ordenar aleatoriamente
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+sortedTags = shuffle(sortedTags);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead title={SITE.TITLE} description={SITE.DESCRIPTION} />
+    <style>
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+      }
+      ul li {
+        display: inline-block;
+      }
+      ul li a {
+        display: inline-block;
+        font-size: 1rem;
+        transition: font-size 0.2s ease;
+        text-decoration: none;
+      }
+      ul li a[data-count="1"] {
+        font-size: 1rem;
+      }
+      ul li a[data-count="2"] {
+        font-size: 1.2rem;
+      }
+      ul li a[data-count="3"] {
+        font-size: 1.4rem;
+      }
+      ul li a[data-count="4"] {
+        font-size: 1.6rem;
+      }
+      ul li a[data-count="5"] {
+        font-size: 1.8rem;
+      }
+      ul li a[data-count="6"] {
+        font-size: 2rem;
+      }
+      ul li a[data-count="7"] {
+        font-size: 2.2rem;
+      }
+      ul li a[data-count="8"] {
+        font-size: 2.4rem;
+      }
+      ul li a[data-count="9"] {
+        font-size: 2.6rem;
+      }
+      ul li a[data-count="10"] {
+        font-size: 2.8rem;
+      }
+      ul li a[data-count="11"] {
+        font-size: 3rem;
+      }
+      ul li a[data-count="12"] {
+        font-size: 3.2rem;
+      }
+      ul li a[data-count="13"] {
+        font-size: 3.4rem;
+      }
+      ul li a[data-count="14"] {
+        font-size: 3.6rem;
+      }
+      ul li a[data-count="15"] {
+        font-size: 3.8rem;
+      }
+      ul li a[data-count="16"] {
+        font-size: 4rem;
+      }
+      ul li a[data-count="17"] {
+        font-size: 4.2rem;
+      }
+      ul li a[data-count="18"] {
+        font-size: 4.4rem;
+      }
+      ul li a[data-count="19"] {
+        font-size: 4.6rem;
+      }
+      ul li a[data-count="20"] {
+        font-size: 4.8rem;
+      }
+      ul li a {
+        display: block;
+      }
+      .title {
+        margin: 0;
+        color: rgb(var(--black));
+        line-height: 1;
+      }
+      ul li a:hover h4 {
+        color: rgb(var(--accent));
+        text-decoration: underline;
+      }
+      ul a:hover img {
+        box-shadow: var(--box-shadow);
+      }
+      @media (max-width: 720px) {
+        ul {
+          gap: 0.5em;
+        }
+        ul li {
+          width: 100%;
+          text-align: center;
+        }
+        ul li:first-child {
+          margin-bottom: 0;
+        }
+        ul li:first-child .title {
+          font-size: 1.563em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        <Breadcrumbs icons={["tags"]} />
+        <h1>Tags</h1>
+        <p>En ocasiones escribo sobre...</p>
+        <ul>
+          {
+            sortedTags.map((tag: string) => (
+              <li>
+                <a href={`/tags/${tag}/`} data-count={tagCounts[tag]}>
+                  <h4 class="title">{tag}</h4>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

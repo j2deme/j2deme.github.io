@@ -1,0 +1,107 @@
+---
+import BackToTop from "../components/BackToTop.astro";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import voca from "voca";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { Icon } from "astro-icon/components";
+
+type Props = CollectionEntry<"blog">["data"];
+
+const { title, description } = Astro.props;
+const heroImage = Astro.props.heroImage ? Astro.props.heroImage : null;
+---
+
+<html lang="es">
+  <head>
+    <BaseHead title={voca.titleCase(title)} description={description} />
+    <style>
+      main {
+        width: calc(100% - 1em);
+        max-width: 100%;
+        margin: 0;
+      }
+      .hero-image {
+        width: 100%;
+      }
+      .hero-image img {
+        display: block;
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: var(--box-shadow);
+      }
+      .prose {
+        width: 75ch;
+        max-width: calc(100% - 1em);
+        margin: auto;
+        padding: 1em;
+        color: rgb(var(--gray-dark));
+      }
+      .title {
+        margin-bottom: 1em;
+        padding: 1em 0;
+        text-align: center;
+        margin: 0;
+        line-height: 1;
+      }
+      .title h1 {
+        margin: 0 0 0.5em 0;
+      }
+      article {
+        width: 80ch;
+        margin: auto;
+        padding: 1em;
+        align-self: center;
+        box-shadow: none;
+        background-color: transparent;
+      }
+      @media (max-width: 720px) {
+        main {
+          width: 100%;
+          max-width: 100%;
+        }
+        .prose {
+          width: 100%;
+          padding: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <article>
+        <Breadcrumbs icons={["tags", "tag"]} />
+        <div class="hero-image">
+          {
+            heroImage && (
+              <Image
+                src={heroImage}
+                alt={title}
+                width={1020}
+                height={510}
+                loading={"eager"}
+              />
+            )
+          }
+        </div>
+        <div class="prose">
+          <div class="title">
+            <h1>
+              Posts sobre
+              {voca.titleCase(title)}
+            </h1>
+          </div>
+          <p>Seguramente alguno de estos posts te sea de utilidad:</p>
+          <slot />
+        </div>
+        <BackToTop />
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>
