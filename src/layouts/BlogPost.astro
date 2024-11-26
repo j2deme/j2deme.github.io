@@ -9,11 +9,9 @@ import Header from "../components/Header.astro";
 import type { CollectionEntry } from "astro:content";
 import type { MarkdownHeading } from "astro";
 import { Image } from "astro:assets";
-import BackTo from "../components/BackTo.astro";
 import { Icon } from "astro-icon/components";
 import TableOfContents from "../components/TableOfContents.astro";
-
-const currentPath = Astro.url.pathname;
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
   headings: MarkdownHeading[];
@@ -77,7 +75,7 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
         font-style: italic;
       }
       article {
-        width: 100%;
+        width: 80ch;
         margin: auto;
         padding: 1em;
         align-self: center;
@@ -135,7 +133,13 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
     <Header />
     <main>
       <article>
-        <BackTo currentPath={currentPath} />
+        {
+          Astro.url.pathname === "/about/" ? (
+            <Breadcrumbs title={title} icons={["user"]} compact={true} />
+          ) : (
+            <Breadcrumbs title={title} icons={["archive", "file-text"]} />
+          )
+        }
         <div class="hero-image">
           {
             heroImage && (
