@@ -7,6 +7,7 @@ import { getCollection } from "astro:content";
 import FormattedDateHuman from "../../components/FormattedDateHuman.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
 const apps = (await getCollection("apps")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -27,7 +28,6 @@ const apps = (await getCollection("apps")).sort(
         padding: 0;
       }
       ul li {
-        /* border: 1px solid var(--pico-color-grey-200); */
         width: 100%;
         padding: 0.5rem;
         border-radius: 12px;
@@ -87,7 +87,6 @@ const apps = (await getCollection("apps")).sort(
         }
         ul li a img {
           width: 100%;
-          /* flex: 1; */
         }
         ul li a .text-content {
           padding-top: 0;
@@ -100,6 +99,7 @@ const apps = (await getCollection("apps")).sort(
     <Header />
     <main>
       <section>
+        <Breadcrumbs icons={["code"]} />
         <h1>Apps</h1>
         <ul>
           {
