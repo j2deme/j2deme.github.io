@@ -13,15 +13,10 @@ var posts = await getCollection("blog");
 posts = posts.filter(({ data }) =>
   import.meta.env.PROD ? data.draft !== true : true
 );
-posts.sort((a, b) => {
-  const dateA = a.data.updatedDate
-    ? new Date(a.data.updatedDate)
-    : new Date(a.data.pubDate);
-  const dateB = b.data.updatedDate
-    ? new Date(b.data.updatedDate)
-    : new Date(b.data.pubDate);
-  return dateB.valueOf() - dateA.valueOf();
-});
+posts.sort(
+  (a, b) =>
+    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
 ---
 
 <!doctype html>
@@ -32,14 +27,15 @@ posts.sort((a, b) => {
       ul {
         display: flex;
         flex-wrap: wrap;
-        gap: 2rem;
+        justify-content: space-between;
+        gap: 1rem;
         list-style-type: none;
         margin: 0;
         padding: 0;
       }
       ul li {
         position: relative;
-        width: calc(50% - 1rem);
+        width: calc(30% - 0.5rem);
       }
       ul li::marker {
         content: none;
@@ -58,6 +54,9 @@ posts.sort((a, b) => {
       }
       ul li:first-child .title {
         font-size: 2.369rem;
+      }
+      ul li:first-child .tags {
+        bottom: 4.7rem;
       }
       ul li img {
         margin-bottom: 0.5rem;
@@ -88,6 +87,28 @@ posts.sort((a, b) => {
         top: 0.5rem;
         right: 0.5rem;
         color: var(--pico-color-amber-250);
+        background-color: rgb(var(--white));
+        border-radius: 75%;
+        padding: 0.2rem;
+        font-size: 1.1rem;
+      }
+      .tags {
+        float: right;
+        position: absolute;
+        bottom: 3.6rem;
+        right: 0.5rem;
+        font-size: 0.75rem;
+        display: inline-flex;
+        justify-items: flex-end;
+      }
+      .tags a {
+        margin-right: 0.5rem;
+        color: rgba(var(--gray-light), 0.5);
+        transition: color 0.3s ease;
+      }
+      .tags a:hover {
+        color: rgba(var(--gray-light), 0.9);
+        transition: color 0.3s ease;
       }
       @media (max-width: 720px) {
         ul {
@@ -101,7 +122,13 @@ posts.sort((a, b) => {
           margin-bottom: 0;
         }
         ul li:first-child .title {
-          font-size: 1.563em;
+          font-size: 1.35em;
+        }
+        ul li:first-child .tags {
+          bottom: 4.2rem;
+        }
+        .tags {
+          bottom: 4rem;
         }
       }
     </style>
@@ -115,16 +142,32 @@ posts.sort((a, b) => {
         {
           posts.map((post) => (
             <li>
-              {post.data.draft && (
-                <Icon name="tabler:barrier-block" size="1.5em" class="draft" />
-              )}
               <a href={`/blog/${post.slug}/`}>
-                <Image
-                  width={720}
-                  height={360}
-                  src={post.data.heroImage || ""}
-                  alt={post.data.title}
-                />
+                <div>
+                  {post.data.draft && (
+                    <Icon
+                      name="tabler:barrier-block"
+                      size="1.5em"
+                      class="draft"
+                    />
+                  )}
+                  <Image
+                    width={720}
+                    height={360}
+                    src={post.data.heroImage || ""}
+                    alt={post.data.title}
+                  />
+                  {post.data.tags && (
+                    <div class="tags">
+                      {post.data.tags.sort().map((tag) => (
+                        <a href={`/blog/tag/${tag}/`}>
+                          <Icon name="tabler:tag" />
+                          {tag}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <h4 class="title">{post.data.title}</h4>
                 <p class="date">
                   <FormattedDate date={post.data.pubDate.toString()} />
