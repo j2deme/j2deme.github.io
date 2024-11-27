@@ -72,13 +72,22 @@ const updatedDate = Astro.props.updatedDate
         font-style: italic;
       }
       article {
-        width: 80ch;
-        max-width: calc(100% - 2em);
+        max-width: 80ch;
         margin: auto;
         padding: 1em;
         align-self: center;
         box-shadow: none;
         background-color: transparent;
+      }
+      @media (max-width: 720px) {
+        main {
+          width: 100%;
+          max-width: 100%;
+        }
+        .prose {
+          width: 100%;
+          padding: 0.5rem;
+        }
       }
     </style>
   </head>
