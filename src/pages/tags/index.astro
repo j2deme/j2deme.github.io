@@ -67,12 +67,17 @@ sortedTags = shuffle(sortedTags);
       }
       ul li {
         display: inline-block;
+        width: fit-content;
       }
       ul li a {
         display: inline-block;
         font-size: 1rem;
         transition: font-size 0.2s ease;
         text-decoration: none;
+      }
+      ul li a:hover h4 {
+        color: rgb(var(--accent));
+        text-decoration: underline;
       }
       ul li a[data-count="1"] {
         font-size: 1rem;
@@ -134,27 +139,12 @@ sortedTags = shuffle(sortedTags);
       ul li a[data-count="20"] {
         font-size: 4.8rem;
       }
-      ul li a {
-        display: block;
-      }
-      .title {
-        margin: 0;
-        color: rgb(var(--black));
-        line-height: 1;
-      }
-      ul li a:hover h4 {
-        color: rgb(var(--accent));
-        text-decoration: underline;
-      }
-      ul a:hover img {
-        box-shadow: var(--box-shadow);
-      }
       @media (max-width: 720px) {
         ul {
           gap: 0.5em;
         }
         ul li {
-          width: 100%;
+          width: fit-content;
           text-align: center;
         }
         ul li:first-child {
