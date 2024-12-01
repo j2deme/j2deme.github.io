@@ -15,6 +15,7 @@ const blog = defineCollection({
         message: 'tags must be unique',
     }).optional(),
     draft: z.boolean().optional(),
+		repo: z.string().optional(),
 	}),
 });
 
