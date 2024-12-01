@@ -91,6 +91,7 @@ posts.sort(
         border-radius: 75%;
         padding: 0.2rem;
         font-size: 1.1rem;
+        box-shadow: inset 0 0 0.1rem rgba(var(--black), 0.6);
       }
       .tags {
         float: right;
@@ -160,7 +161,7 @@ posts.sort(
                   {post.data.tags && (
                     <div class="tags">
                       {post.data.tags.sort().map((tag) => (
-                        <a href={`/blog/tag/${tag}/`}>
+                        <a href={`/tags/${tag}/`}>
                           <Icon name="tabler:tag" />
                           {tag}
                         </a>
