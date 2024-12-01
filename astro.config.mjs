@@ -1,6 +1,7 @@
 import {
   transformerMetaHighlight,
   transformerNotationDiff,
+  transformerNotationFocus,
 } from "@shikijs/transformers";
 
 import { SITE } from "./src/consts.ts";
@@ -21,6 +22,7 @@ const rpcOptions = {
   },
   keepBackground: false,
   transformers: [
+    transformerNotationFocus(),
     transformerNotationDiff(),
     transformerMetaHighlight(),
     transformerCopyButton({

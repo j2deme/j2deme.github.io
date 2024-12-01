@@ -48,7 +48,53 @@ figure[data-rehype-pretty-code-figure] pre+figcaption {
 
 [data-highlighted-line] {
   background-color: var(--pico-color-slate-700);
-  border-radius: none;
+  border-radius: 0;
+}
+
+/* Styling focused blocks */
+.has-focused [data-line] {
+  filter: blur(0.095rem);
+  transition: filter 0.3s;
+}
+
+pre.has-focused:hover [data-line] {
+  filter: blur(0);
+}
+
+[data-line].focused {
+  filter: none !important;
+}
+
+.diff {
+  display: inline-block;
+  width: 101%;
+  padding: 0 12px;
+}
+
+.diff::first-of-type(span) {
+  margin-left: 1.7rem;
+}
+
+.diff.add {
+  background-color: rgba(64, 150, 20, 0.25);
+}
+
+.diff.remove {
+  background-color: rgba(238, 64, 46, 0.25);
+}
+
+[data-line].diff.remove::before {
+  content: "-" !important;
+  font-weight: 900;
+  color: var(--pico-color-red-500);
+  text-shadow: 0 0 0.1rem var(--pico-color-red-700);
+}
+
+[data-line].diff.add::before {
+  content: "+" !important;
+  font-weight: 900;
+  color: var(--pico-color-green-500);
+  text-shadow: 0 0 0.1rem var(--pico-color-green-700);
 }
 
 /* Styling line numbers */
