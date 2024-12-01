@@ -4,7 +4,6 @@ description: "Guía paso a paso para crear un CRUD básico en PHP"
 pubDate: "2024/11/24"
 heroImage: "/blog-placeholder-1.jpg"
 tags: ["php", "coding"]
-draft: false
 ---
 
 ## Introducción
@@ -95,7 +94,7 @@ crud-php/
 - Los archivos `index.php`, `new.php`, `save.php`, `view.php`, `update.php` y `delete.php` contendrán el código PHP para las operaciones CRUD.
   - Si tuvieramos más tablas, sería recomendable agregar un prefijo o sufijo al nombre del archivo para identificar la tabla con la que trabaja. _P.e._ `users_index.php`, `products_index.php`, etc.
 
-## Diseño de la aplicación
+## Diseño de la interfaz
 
 Puesto que no es el objetivo de este tutorial, no entraremos mucho en temas de diseño, utilizaremos la estructura básica propuesta por el micro framework [PicoCSS](https://picocss.com/), para que se aplique un diseño simple y limpio a nuestra aplicación.
 
@@ -117,7 +116,7 @@ Vamos a empezar por separar nuestro _layout_ en dos archivos: `header.php` y `fo
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
-    <header>
+    <header class="container">
       <h1>Gestor de Usuarios</h1>
     </header>
     <main class="container">
@@ -125,7 +124,7 @@ Vamos a empezar por separar nuestro _layout_ en dos archivos: `header.php` y `fo
 
 ```html title="inc/footer.php"
     </main>
-    <footer>
+    <footer class="container">
       <p>&copy; 2024 - Todos los derechos reservados</p>
     </footer>
   </body>
@@ -481,4 +480,4 @@ Al utilizar PDO, la conexión a la base de datos y la gestión de la informació
 
 Cabe mencionar que este es un CRUD muy básico y que se puede mejorar y extender de muchas maneras, como agregar validaciones de datos, paginación, búsqueda, filtros, etc.
 
-Adicionalmente, se podría agregar un sistema de autenticación para proteger las operaciones CRUD y permitir que sólo los usuarios autenticados puedan acceder a ellas, pero eso ya es tema para otra guía. 😉
+Adicionalmente, se podría agregar un [sistema de autenticación](../login-basico-en-php/) para proteger las operaciones CRUD y permitir que sólo los usuarios autenticados puedan acceder a ellas, pero eso ya es tema para otra guía. 😉
