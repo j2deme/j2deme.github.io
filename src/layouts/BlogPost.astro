@@ -82,12 +82,45 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
         box-shadow: none;
         background-color: transparent;
       }
+      .extras {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+      .extras div {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        max-width: 100%;
+        margin-bottom: 1em;
+      }
+      .repo {
+        justify-content: flex-start;
+        padding: 0.1em 0.5em;
+        border-radius: var(--pico-border-radius);
+        color: rgb(var(--gray));
+        font-size: 0.8em;
+        font-family: var(--font-code);
+      }
+      .repo a {
+        text-decoration: none;
+        color: rgb(var(--gray));
+        transition: 0.2s ease;
+      }
+      .repo a:hover {
+        color: rgb(var(--gray-dark));
+      }
+      .repo.card {
+        padding: 0.5em;
+        border-radius: var(--pico-border-radius);
+        background-color: var(--pico-color-slate-50);
+        color: var(--pico-color-slate-450);
+      }
       .tags {
         display: flex;
+        align-self: flex-end;
         flex-wrap: wrap;
         justify-content: flex-end;
-        gap: 0.5em;
-        margin-bottom: 1em;
       }
       .tag {
         padding: 0.3em;
@@ -173,16 +206,27 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
               }
             </div>
           </div>
-          <div class="tags">
-            {
-              tags &&
-                tags.map((tag) => (
-                  <a href={`/tags/${tag}/`} class="tag">
-                    <Icon name="tabler:tag" />
-                    {tag}
+          <div class="extras">
+            <div class="repo">
+              {
+                Astro.props.repo && (
+                  <a href={Astro.props.repo} target="_blank" rel="noopener">
+                    <Icon name="tabler:brand-github" /> Repositorio
                   </a>
-                ))
-            }
+                )
+              }
+            </div>
+            <div class="tags">
+              {
+                tags &&
+                  tags.map((tag) => (
+                    <a href={`/tags/${tag}/`} class="tag">
+                      <Icon name="tabler:tag" />
+                      {tag}
+                    </a>
+                  ))
+              }
+            </div>
           </div>
           <TableOfContents headings={headings} />
           {
@@ -194,6 +238,17 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
             )
           }
           <slot />
+          {
+            Astro.props.repo && (
+              <div class="repo card">
+                <Icon name="tabler:brand-github" /> Puedes encontrar el código
+                desarrollado en este post en:{" "}
+                <a href={Astro.props.repo} target="_blank" rel="noopener">
+                  {Astro.props.repo}
+                </a>
+              </div>
+            )
+          }
         </div>
         <BackToTop />
       </article>
