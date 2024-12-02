@@ -95,8 +95,11 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
         margin-bottom: 1em;
       }
       .repo {
-        justify-content: flex-start;
-        padding: 0.1em 0.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1em 0;
+        padding: 1em;
         border-radius: var(--pico-border-radius);
         color: rgb(var(--gray));
         font-size: 0.8em;
@@ -112,9 +115,26 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
       }
       .repo.card {
         padding: 0.5em;
+        margin: 0;
         border-radius: var(--pico-border-radius);
         background-color: var(--pico-color-slate-50);
         color: var(--pico-color-slate-450);
+      }
+      .repo.card p {
+        margin: 0;
+        margin-left: 0.5em;
+        color: rgb(var(--gray));
+      }
+      .repo.card svg {
+        min-width: 20px;
+        padding: 0.1rem;
+        font-size: 1.5rem;
+      }
+      .repo.card a {
+        color: var(--accent-light);
+      }
+      .repo.card a:hover {
+        color: rgb(var(--gray-dark));
       }
       .tags {
         display: flex;
@@ -124,7 +144,7 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
       }
       .tag {
         padding: 0.3em;
-        font-size: 0.7em;
+        font-size: 0.8em;
         color: rgb(var(--gray));
         text-decoration: none;
         transition: 0.2s ease;
@@ -241,11 +261,13 @@ const tags = Astro.props.tags ? Astro.props.tags.sort() : [];
           {
             Astro.props.repo && (
               <div class="repo card">
-                <Icon name="tabler:brand-github" /> Puedes encontrar el código
-                desarrollado en este post en:{" "}
-                <a href={Astro.props.repo} target="_blank" rel="noopener">
-                  {Astro.props.repo}
-                </a>
+                <Icon name="tabler:brand-github" />{" "}
+                <p>
+                  Puedes encontrar el código desarrollado en este post en{" "}
+                  <a href={Astro.props.repo} target="_blank" rel="noopener">
+                    {Astro.props.repo}
+                  </a>
+                </p>
               </div>
             )
           }
