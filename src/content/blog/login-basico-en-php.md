@@ -21,7 +21,7 @@ Como estaremos trabajando con PHP, complementaremos el control de acceso en la b
 
 Consideraremos la siguiente idea para nuestra aplicación:
 
-> Tendremos una aplicación web, que permitirá a los usuarios registrarse y publicar un mensaje en el "muro" de la aplicación, únicamente los usuarios registrados publicar mensajes.
+> Tendremos una aplicación web, que permitirá a los usuarios registrarse y publicar un mensaje en el muro de la aplicación, **únicamente** los usuarios registrados pueden publicar mensajes.
 
 <div class="info">
   <i class="ti ti-info-circle"></i>
@@ -38,7 +38,7 @@ Para seguir este tutorial, necesitamos:
 - Un editor de código, como [Visual Studio Code](https://code.visualstudio.com/)
 - El navegador web de tu elección.
 
-Si tienes más experiencia, sin ningún problema puedes cambiar los requisitos por alternativas más potentes o avanzadas como un _hosting en la nube_, uno o más _containers_ de _Docker_, etc.
+Si tienes más experiencia, sin ningún problema puedes cambiar los requisitos por alternativas más potentes o avanzadas como un _hosting en la nube_, o _containers_ de _Docker_, etc.
 
 [^2]: Si no tienes experiencia con estos servicios, puedes utilizar un paquete de software que incluya todo lo necesario, como [XAMPP](https://www.apachefriends.org/index.html) o [WampServer](https://www.wampserver.com/).
 
@@ -55,9 +55,9 @@ Para la base de datos utilizaré MySQL, pero puedes usar el motor de base de dat
 
 ## Creando la base de datos
 
-Aunque en la realidad las aplicaciones pueden tener muchas tablas y relaciones, para este tutorial solo necesitaremos una tabla para almacenar los usuarios.
+Aunque en la realidad las aplicaciones pueden tener muchas tablas y relaciones, para este tutorial solo necesitaremos una tabla para almacenar los usuarios, esto no significa que no puedas agregar más tablas o relaciones.
 
-Esto no significa que no puedas agregar más tablas o relaciones, construiremos una estructura básica para el _login_, que podrás expandir según tus necesidades.
+Construiremos una estructura básica para el _login_, que podrás expandir según tus necesidades y el contexto de tu aplicación.
 
 ```sql
 CREATE DATABASE IF NOT EXISTS `login_basico_php`;
@@ -85,7 +85,7 @@ Desglosemos la estructura de la tabla `usuarios`:
 - `nombre` y `apellidos`: Almacenan el nombre y los apellidos del usuario, para este tutorial los utilizaremos para personalizar el mensaje que se publicará en el muro, aunque propiamente no son necesarios para el _login_.
 - `mensaje`: Almacena el mensaje que el usuario publicará en el muro, al igual que los campos anteriores, no es necesario para el _login_ pero lo utilizaremos para mostrar cómo se pueden agregar más campos a la tabla.
 
-Una vez que hayas creado la base de datos y la tabla, podemos comenzar a trabajar en el código PHP para manejar el registro y el inicio de sesión de los usuarios.
+Una vez que hayamos creado la base de datos y la tabla, podemos comenzar a trabajar en el código PHP para manejar el registro y el inicio de sesión de los usuarios.
 
 [^3]: En este tutorial utilizaremos la función `password_hash` de PHP para encriptar las contraseñas, pero también podríamos utilizar otras técnicas como `bcrypt` o `argon2`.
 
@@ -156,7 +156,7 @@ try {
 }
 ```
 
-Este archivo contiene las credenciales de conexión a la base de datos, asegúrate de cambiar los valores de `$host`, `$dbname`, `$username` y `$password` por los que correspondan a tu configuración.
+Este archivo contiene las credenciales de conexión a la base de datos, asegúrate de cambiar los valores de `$host`, `$dbname`, `$username`, `$password` y `$port` por los que correspondan a tu configuración.
 
 Igualmente, si utilizas un gestor de base de datos distinto, recuerda cambiar la cadena de conexión según corresponda.
 
@@ -166,7 +166,7 @@ El muro de mensajes es la página principal de nuestra aplicación, donde mostra
 
 Es decir, que la información que se mostrará en esta página será pública, **pero** la edición de los mensajes solo estará disponible para los usuarios autenticados 🔑.
 
-Estará compuesta por "el muro" donde se mostrarán los mensajes registrados y enlaces para iniciar sesión o registrarse.
+Estará compuesta por el "muro" donde se mostrarán los mensajes registrados y enlaces para iniciar sesión o registrarse.
 
 ```php title="index.php" showLineNumbers
 <?php include 'inc/db.php'; ?>
@@ -200,7 +200,7 @@ Analizemos el código propuesto:
 - Incluimos el archivo `db.php` para establecer la conexión a la base de datos.
 - Incluimos los archivos `header.php` y `footer.php` para mantener la estructura de la página.
 - En el bloque principal, mostramos un encabezado `<h2>` con el título de la página, así como una sección `<section>` con la clase `messages` donde se mostrarán los mensajes.
-  - Utilizaremos una consulta SQL para seleccionar todos los registros de la tabla `usuarios` donde el campo `mensaje` no sea nulo.
+  - Utilizaremos una consulta SQL para seleccionar todos los registros de la tabla `usuarios` donde el campo `mensaje` no sea nulo, es decir, que el usuario ya haya publicado un mensaje.
   - Si no hay mensajes para mostrar, se mostrará un mensaje indicando que no hay mensajes.
 
 Agregaremos una barra de navegación en la parte superior de la página, para que los usuarios puedan iniciar sesión o registrarse.
@@ -330,7 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 Desglosemos el código:
 
-- Incluimos el archivo `db.php` para establecer la conexión a la base de datos.
+- Primero incluimos el archivo `db.php` para establecer la conexión a la base de datos.
 - Verificamos que la solicitud sea de tipo `POST`, lo que indica que el formulario de registro ha sido enviado.
 - Obtenemos los datos del formulario (`email`, `password`, `nombre` y `apellidos`).
   - Cada dato se obtiene y se asigna a una variable de manera individual, aunque también podría hacerse a través de una _desestructuración_.
@@ -403,7 +403,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ```
 
-En general, el script `login-procesa.php` es muy sencillo, ya que principalmente verifica que se hayan recibido datos desde el formulario (línea **5**), los obtiene (líneas **6** y **7**) y consulta en la base de datos para verificar si el usuario existe y lo obtiene (líneas **9** a **13**).
+En general, el script `login-procesa.php` es muy sencillo, ya que principalmente verifica que se hayan recibido datos desde el formulario (línea **5**), los obtiene (líneas **6** y **7**) y consulta en la base de datos para verificar si el usuario existe y lo obtiene (líneas **9**-**13**).
 
 Algunos elementos a destacar son:
 
@@ -412,15 +412,15 @@ Algunos elementos a destacar son:
 - La función `password_verify` (línea **15**) nos permite verificar si una contraseña en texto plano coincide con un _hash_ de contraseña almacenado en la base de datos.
   - Puesto que utilizamos `password_hash` para encriptar las contraseñas, es necesario utilizar `password_verify` para verificarlas.
 - La variable `$_SESSION['user']` (línea **16**) se utiliza para almacenar la información del usuario autenticado y mantener la sesión activa, de esta forma, el usuario no tendrá que iniciar sesión en cada página que visite.
-  - En este caso, almacenamos toda la información del usuario en la variable global[^7] `$_SESSION`, en el índice `['user']`, pero podríamos almacenar solo el `id` del usuario o cualquier otro dato específco que necesitemos.
+  - En este caso, almacenamos toda la información del usuario en la variable global `$_SESSION`, en el índice `['user']`, pero podríamos almacenar solo el `id` del usuario o cualquier otro dato específco que necesitemos[^7].
 
 Finalmente, si el usuario y la contraseña son correctos, se inicia una sesión y se redirige al usuario a la página de bienvenida (`dashboard.php`), de lo contrario, se redirige al usuario a la página de inicio de sesión (`login.php`).
 
 [^6]: De hecho no sólo sirve para iniciar una sesión, también se puede utilizar para reanudar una sesión existente.
 [^7]: La variable `$_SESSION` es un array asociativo que se utiliza para almacenar información de la sesión del usuario, como variables de sesión, mensajes de error, mensajes de éxito, etc.
 
-<div class="info">
-  <i class="ti ti-info-circle"></i>
+<div class="warning">
+  <i class="ti ti-alert-triangle"></i>
 
 Recuerda que si se utilizará la variable `$_SESSION` en un script, es necesario llamar a `session_start()` antes de acceder a la variable, de lo contrario, PHP no podrá acceder a la información de la sesión.
 
@@ -428,7 +428,7 @@ Recuerda que si se utilizará la variable `$_SESSION` en un script, es necesario
 
 ## Escribir en el muro
 
-Una vez que el usuario ha iniciado sesión, podrá escribir un mensaje en el muro de la aplicación.
+Una vez que el usuario ha iniciado sesión, podrá editar su mensaje, para que aparezca en el muro de la aplicación.
 
 Crearemos un formulario simple en la página `dashboard.php` para que los usuarios autenticados puedan escribir su mensaje.
 
@@ -456,7 +456,7 @@ Revisemos el código propuesto:
 - Iniciamos inmediatamente una sesión (línea **1**) para poder acceder a la información del usuario autenticado.
 - Incluimos los archivos `header.php` y `footer.php` para mantener la estructura de la página.
 - Mostramos un mensaje de bienvenida personalizado (línea **5**) con el nombre y los apellidos del usuario autenticado, esto lo hacemos utilizando la información almacenada en `$_SESSION['user']`, que contiene los datos del usuario autenticado.
-- Creamos un formulario con un campo de texto (`textarea`) para que el usuario pueda escribir su mensaje, mismo que será procesado por el script `save-msg.php` (líneas **7** - **13**).
+- Creamos un formulario con un campo de texto (`textarea`) para que el usuario pueda escribir su mensaje, mismo que será procesado por el script `save-msg.php` (líneas **7**-**13**).
 
 ```php caption="Estructura de la variable $_SESSION['user']"
 Array
@@ -497,9 +497,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 header('Location: index.php');
 ```
 
-El script `save-msg.php` es bastante simple, ya que solo necesitamos obtener el mensaje del formulario (línea **5**), el `id` del usuario autenticado (línea **6**), preparar y ejecutar una consulta SQL para actualizar el campo `mensaje` del usuario autenticado (líneas **8** - **14**).
+El script `save-msg.php` es bastante simple, ya que solo necesitamos obtener el mensaje del formulario (línea **7**), el `id` del usuario autenticado (línea **8**), preparar y ejecutar una consulta SQL para actualizar el campo `mensaje` del usuario autenticado (líneas **10**-**16**).
 
-Agregamos (o actualizamos, según sea el caso) el mensaje del usuario a la variable `$_SESSION` y redirigimos al usuario hacia el muro de la aplicación, una vez que el mensaje ha sido guardado.
+Agregamos (o actualizamos, según sea el caso) el mensaje del usuario en la variable `$_SESSION` (línea **17**) y redirigimos al usuario hacia el muro de la aplicación, una vez que el mensaje ha sido guardado.
 
 <div class="info">
   <i class="ti ti-info-circle"></i>
@@ -512,14 +512,14 @@ Podemos notar que el mensaje ya debe aparecer en nuestro muro 👏... sin embarg
 
 Lo anterior es debido a que esas vistas no "abren" una sesión, es decir, no tienen forma de acceder a la variable `$_SESSION`, para solucionar esto, editaremos el archivo `header.php` y en la primera línea agregaremos el uso de la función `session_start()`:
 
-```php title="inc/header.php" caption="Uso de session_start() en las vistas"
-<?php session_start(); ?>
+```php title="inc/header.php" caption="Uso de session_start() en las vistas" showLineNumbers
+<?php session_start(); ?> // [!code ++]
 <!DOCTYPE html>
 <html lang="es">
 ...
 ```
 
-Un efecto colateral es que tendremos que quitar el `session_start()` de todas aquellas vistas donde lo hayamos puesto, como _p.e._ `dashboard.php`, de lo contrario, nos devolverá un mensaje similar al siguiente:
+Tendremos que quitar el `session_start()` de todas aquellas vistas donde lo hayamos puesto, como _p.e._ `dashboard.php`, de lo contrario, nos devolverá un mensaje similar al siguiente:
 
 ```bash
 Notice: session_start(): Ignoring session_start() because a session is already active
@@ -605,7 +605,7 @@ Prácticamente podríamos decir que hemos finalizado nuestro sistema de login, s
 
 ### Mejoras adicionales
 
-Es lógico suponer que ciertas zonas de nuestra aplicación serán públicas (_p.e._ el muro, el formulario de registro, el formulario de inicio de sesión, etc.), mientras que otras **deben** estar protegidas detrás de un inicio de sesión.
+Es lógico suponer que ciertas zonas de nuestra aplicación serán públicas (_p.e._ el muro y los formularios de registro y de inicio de sesión), mientras que otras **deben** estar protegidas detrás de un inicio de sesión.
 
 Por lo anterior, agregaremos un pequeño script que nos permitirá "bloquear" el acceso a scripts y páginas, que requieran tener iniciada la sesión.
 
@@ -618,7 +618,7 @@ Este script verifica si existe información de algún usuario en la variable `$_
 Ubicaremos esta pequeña línea de código, en cada script PHP donde queramos evitar accesos sin permisos, justo debajo de la función `session_start()`:
 
 ```php caption="Verificación en vistas y formularios"
-<?php session_start(); ?>
+<?php include 'inc/header.php'; ?>
 <?php if (!isset($_SESSION['user'])) header('Location: login.php'); ?>
 ```
 
