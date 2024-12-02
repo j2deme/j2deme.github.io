@@ -670,7 +670,7 @@ Agregaremos algunos estilos CSS en el archivo `assets/css/app.css`, para mejorar
 }
 ```
 
-## _Et voilá!_
+## _Et voilà!_
 
 Ahora podemos crear algunas cuentas y editar los mensajes de cada usuario, para ver el resultado en el muro compartido.
 
