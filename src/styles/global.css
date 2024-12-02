@@ -247,8 +247,8 @@ footer .social-links a:last-of-type:hover {
 
 .warning {
 	border-radius: var(--pico-border-radius);
-	background-color: var(--pico-color-amber-50);
-	color: var(--pico-color-amber-500);
+	background-color: var(--pico-color-yellow-50);
+	color: var(--pico-color-yellow-500);
 }
 
 .error {
