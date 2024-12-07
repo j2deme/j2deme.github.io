@@ -27,7 +27,7 @@ export const SITE: Site = {
 
 export const NAV_LINKS: Link[] = [
   // { href: '/slides', label: 'Slides', icon: 'presentation' },
-  { href: '/blog', label: 'Blog', icon: 'archive' },
+  { href: '/blog', label: 'Blog', icon: 'news' },
   { href: '/tags', label: 'Tags', icon: 'tags' },
   { href: '/apps', label: 'Apps', icon: 'code' },
   { href: '/about', label: 'Acerca de', icon: 'user' },
