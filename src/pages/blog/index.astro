@@ -28,14 +28,14 @@ posts.sort(
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        gap: 1rem;
+        gap: 0.7rem;
         list-style-type: none;
         margin: 0;
         padding: 0;
       }
       ul li {
         position: relative;
-        width: calc(30% - 0.5rem);
+        width: calc(31%);
       }
       ul li::marker {
         content: none;
@@ -56,11 +56,12 @@ posts.sort(
         font-size: 2.369rem;
       }
       ul li:first-child .tags {
-        bottom: 4.7rem;
+        margin-top: -1.85rem;
       }
       ul li img {
         margin-bottom: 0.5rem;
-        border-radius: 12px;
+        border-radius: var(--pico-border-radius);
+        filter: drop-shadow(0 0 2px rgba(var(--black), 0.1));
       }
       ul li a {
         display: block;
@@ -85,6 +86,7 @@ posts.sort(
         float: right;
         position: absolute;
         top: 0.5rem;
+        z-index: 1;
         right: 0.5rem;
         color: var(--pico-color-amber-250);
         background-color: rgb(var(--white));
@@ -96,20 +98,29 @@ posts.sort(
       .tags {
         float: right;
         position: absolute;
-        bottom: 3.6rem;
-        right: 0.5rem;
-        font-size: 0.75rem;
+        margin-top: -1.87rem;
+        right: 0rem;
+        font-size: 0.8rem;
         display: inline-flex;
-        justify-items: flex-end;
+        justify-content: flex-end;
+        background: rgb(2, 0, 36);
+        background: linear-gradient(
+          180deg,
+          rgba(55, 55, 55, 0.3) 10%,
+          rgba(55, 55, 55, 0.7) 100%
+        );
+        width: fit-content;
+        border-top-left-radius: var(--pico-border-radius);
+        border-bottom-right-radius: var(--pico-border-radius);
+        text-shadow: inset 0 0 0.1rem rgba(var(--black), 0.9);
       }
       .tags a {
         margin-right: 0.5rem;
-        color: rgba(var(--gray-light), 0.5);
+        color: rgba(var(--gray-light), 0.8);
         transition: color 0.3s ease;
       }
       .tags a:hover {
-        color: rgba(var(--gray-light), 0.9);
-        transition: color 0.3s ease;
+        color: rgba(var(--gray-light), 1);
       }
       @media (max-width: 720px) {
         ul {
@@ -123,13 +134,7 @@ posts.sort(
           margin-bottom: 0;
         }
         ul li:first-child .title {
-          font-size: 1.35em;
-        }
-        ul li:first-child .tags {
-          bottom: 4.2rem;
-        }
-        .tags {
-          bottom: 4rem;
+          font-size: 1.4em;
         }
       }
     </style>
