@@ -15,7 +15,7 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/blog-placeholder-2.jpg" } = Astro.props;
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!-- Global Metadata -->
@@ -57,4 +57,4 @@ import { ViewTransitions } from "astro:transitions";
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<ViewTransitions />
+<ClientRouter />
