@@ -2,7 +2,7 @@
 title: Login básico en PHP
 description: Guía paso a paso para construir un login básico en PHP
 pubDate: 2024-11-26
-heroImage: /login-basico-en-php.png
+heroImage: /covers/login-basico-en-php.png
 tags: ["coding", "php"]
 repo: https://github.com/j2deme/login-basico-php
 ---
@@ -674,7 +674,7 @@ Agregaremos algunos estilos CSS en el archivo `assets/css/app.css`, para mejorar
 
 Ahora podemos crear algunas cuentas y editar los mensajes de cada usuario, para ver el resultado en el muro compartido.
 
-![Resultado: Login básico en PHP](/login-basico-en-php.png)
+![Resultado: Login básico en PHP](assets/login-basico-en-php.png)
 
 **¡Listo!** 🎉 hemos finalizado este tutorial y aprendimos como hacer un login básico utilizando PHP.
 
