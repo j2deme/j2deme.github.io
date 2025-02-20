@@ -4,7 +4,6 @@ description: Uso de PlantUML para crear diversos diagramas UML como diagramas de
 pubDate: 2025-02-04
 heroImage: /blog-placeholder-2.jpg
 tags: ["coding", "uml", "apps"]
-draft: true
 ---
 
 ## Una breve introducción a UML
